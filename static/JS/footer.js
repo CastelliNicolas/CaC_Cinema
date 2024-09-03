@@ -1,6 +1,6 @@
 let footer = `<div class="footer-principal">
   <div class="navLogo">
-      <a href="index.html"><img class="logo" src="static/imagenes/LogoCine.jpeg" alt="logo cine" /></a>
+      <a href="index.html"><img class="logo" src="/static/imagenes/LogoCine.jpeg" alt="logo cine" /></a>
       <h1>Codo Cinema</h1>
   </div>
 
@@ -40,19 +40,19 @@ let footer = `<div class="footer-principal">
   <div class="redes">
     <p>Seguinos</p>
     <a href="#" target="_blank">
-      <img src="static/imagenes/whatsapp.svg" alt="red whatsapp" />
+      <img src="/static/imagenes/whatsapp.svg" alt="red whatsapp" />
     </a>
     <a href="https://www.facebook.com/" target="_blank">
-      <img src="static/imagenes/facebook.svg" alt="red facebook" />
+      <img src="/static/imagenes/facebook.svg" alt="red facebook" />
     </a>
     <a href="https://www.instagram.com/" target="_blank">
-      <img src="static/imagenes/instagram.svg" alt="red instagram" />
+      <img src="/static/imagenes/instagram.svg" alt="red instagram" />
     </a>
     <a href="https://twitter.com/" target="_blank">
-      <img src="static/imagenes/x.svg" alt="red x" />
+      <img src="/static/imagenes/x.svg" alt="red x" />
     </a>
     <a href="https://www.youtube.com/" target="_blank">
-      <img src="static/imagenes/youtube.svg" alt="red youtube" />
+      <img src="/static/imagenes/youtube.svg" alt="red youtube" />
     </a>
   </div>
   <p>© 2024 Todos los derechos reservados</p>

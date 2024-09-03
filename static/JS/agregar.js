@@ -1,5 +1,5 @@
-// const URL = "http://127.0.0.1:5000/"
-const URL = "https://sinost.pythonanywhere.com/";
+const URL = "http://127.0.0.1:5000/"
+//const URL = "https://sinost.pythonanywhere.com/";
 //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
 //const URL = "https://USUARIO.pythonanywhere.com/"
 
@@ -26,7 +26,7 @@ document.getElementById("formulario").addEventListener("submit", function (event
       }
     })
 
-    //Respuesta OK, muestra una alerta informando que el producto se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
+    //Respuesta OK, muestra una alerta informando que la pelicula se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
     .then(function (data) {
       let mensajeErrorElemento = document.getElementById("mensajeError");
 
@@ -58,9 +58,11 @@ document.getElementById("formulario").addEventListener("submit", function (event
     .finally(function () {
       document.getElementById("nombre").value = "";
       document.getElementById("genero").value = "";
+      document.getElementById("director").value = "";
       document.getElementById("duracion").value = "";
       document.getElementById("imagen").value = "";
-      document.getElementById("atp").value = "";
-      document.getElementById("detalle").value = "";
+      document.getElementById("trailer").value = "";
+      document.getElementById("clasificacion").value = "";
+      document.getElementById("sinopsis").value = "";
     });
 });

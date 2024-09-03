@@ -1,5 +1,5 @@
-// const URL = "http://127.0.0.1:5000/"
-const URL = "https://sinost.pythonanywhere.com/";
+const URL = "http://127.0.0.1:5000/"
+//const URL = "https://sinost.pythonanywhere.com/";
 
 // Realizamos la solicitud GET al servidor para obtener todos los peliculas.
 fetch(URL + "pelicula")
@@ -31,16 +31,20 @@ fetch(URL + "pelicula")
         pelicula.genero +
         "</td>" +
         "<td>" +
+        pelicula.director +
+        "</td>" +
+        "<td>" +
         pelicula.duracion +
         "</td>" +
-        "<td><img src=https://www.pythonanywhere.com/user/Sinost/files/home/Sinost/mysite/static/imagenes/" +
+        "<td><img src=./static/imagenes/" +
+        //"<td><img src=https://www.pythonanywhere.com/user/Sinost/files/home/Sinost/mysite/static/imagenes/" +
         pelicula.imagen_url +
         ' alt="Imagen de la pelicula" style="width: 100px;"></td>' +
         "<td>" +
-        pelicula.atp +
+        pelicula.trailer_url +
         "</td>" +
         "<td>" +
-        pelicula.detalle +
+        pelicula.clasificacion +
         "</td>";
       //Una vez que se crea la fila con el contenido del pelicula, se agrega a la tabla utilizando el método appendChild del elemento tablaPeliculas.
       tablaPeliculas.appendChild(fila);

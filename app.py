@@ -42,10 +42,12 @@ class Catalogo:
             codigo INT AUTO_INCREMENT PRIMARY KEY,
             nombre VARCHAR(255) NOT NULL,
             genero VARCHAR(255) NOT NULL,
+            director VARCHAR(255) NOT NULL,
             duracion int NOT NULL,
             imagen_url VARCHAR(255),
-            atp VARCHAR(255),
-            detalle VARCHAR(255))''')
+            trailer_url VARCHAR(255),
+            clasificacion ENUM('ATP', '+13', '+16', '+18'),
+            sinopsis VARCHAR(450) NOT NULL)''')
         self.conn.commit()
 
         # Cerrar el cursor inicial y abrir uno nuevo con el parámetro dictionary=True
@@ -53,31 +55,34 @@ class Catalogo:
         self.cursor = self.conn.cursor(dictionary=True)
 
     def listar_pelicula(self):
+        # Consultamos todas las peliculas en la base de datos
         self.cursor.execute("SELECT * FROM pelicula")
         pelicula = self.cursor.fetchall()
         return pelicula
     
     def consultar_pelicula(self, codigo):
-        # Consultamos un producto a partir de su código
+        # Consultamos un pelicula a partir de su código
         self.cursor.execute(f"SELECT * FROM pelicula WHERE codigo = {codigo}")
         return self.cursor.fetchone()
 
-    def agregar_pelicula(self, nombre, genero, duracion, imagen, atp, detalle):
-        sql = "INSERT INTO pelicula (nombre, genero, duracion, imagen_url, atp, detalle) VALUES (%s, %s, %s, %s, %s, %s)"
-        valores = (nombre, genero, duracion, imagen, atp, detalle)
+    def agregar_pelicula(self, nombre, genero, director, duracion, imagen, trailer, clasificacion, sinopsis):
+        # Agregamos una nueva pelicula a la base de datos
+        sql = "INSERT INTO pelicula (nombre, genero, director, duracion, imagen_url, trailer_url, clasificacion, sinopsis) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        valores = (nombre, genero, director, duracion, imagen, trailer, clasificacion, sinopsis)
         self.cursor.execute(sql,valores)
         self.conn.commit()
         return self.cursor.lastrowid
 
-    def modificar_pelicula(self, codigo, nueva_nombre, nueva_genero, nuevo_duracion, nueva_imagen, nuevo_atp, nuevo_detalle):
-        sql = "UPDATE pelicula SET nombre = %s, genero = %s, duracion = %s, imagen_url = %s, atp = %s, detalle = %s WHERE codigo = %s"
-        valores = (nueva_nombre, nueva_genero, nuevo_duracion, nueva_imagen, nuevo_atp, nuevo_detalle, codigo)
+    def modificar_pelicula(self, codigo, nuevo_nombre, nuevo_genero, nuevo_director, nueva_duracion, nueva_imagen, nuevo_trailer, nueva_clasificacion, nueva_sinopsis):
+        # Modificamos una pelicula existente en la base de datos
+        sql = "UPDATE pelicula SET nombre = %s, genero = %s, director = %s, duracion = %s, imagen_url = %s, trailer_url = %s, clasificacion = %s, sinopsis = %s WHERE codigo = %s"
+        valores = (nuevo_nombre, nuevo_genero, nuevo_director, nueva_duracion, nueva_imagen, nuevo_trailer, nueva_clasificacion, nueva_sinopsis, codigo)
         self.cursor.execute(sql, valores)
         self.conn.commit()
         return self.cursor.rowcount > 0
 
     def eliminar_pelicula(self, codigo):
-        # Eliminamos un producto de la tabla a partir de su código
+        # Eliminamos una pelicula de la tabla a partir de su código
         self.cursor.execute(f"DELETE FROM pelicula WHERE codigo = {codigo}")
         self.conn.commit()
         return self.cursor.rowcount > 0
@@ -86,11 +91,12 @@ class Catalogo:
 # Cuerpo del programa
 #--------------------------------------------------------------------
 # Crear una instancia de la clase Catalogo
-catalogo = Catalogo(host='Sinost.mysql.pythonanywhere-services.com', user='Sinost', password='cinemaCodo', database='Sinost$cinema')
+catalogo = Catalogo(host="localhost", user="root", password="", database="pelicula")
+# catalogo = Catalogo(host='Sinost.mysql.pythonanywhere-services.com', user='Sinost', password='cinemaCodo', database='Sinost$cinema')
 
 # Carpeta para guardar las imagenes
-# ruta_destino = './static/imagenes/'
-ruta_destino = '/home/Sinost/mysite/static/imagenes/'
+ruta_destino = './static/imagenes/'
+# ruta_destino = '/home/Sinost/mysite/static/imagenes/'
 
 @app.route("/pelicula", methods=["GET"])
 def listar_pelicula():
@@ -110,18 +116,19 @@ def agregar_pelicula():
     #Recojo los datos del form
     nombre = request.form['nombre']
     genero = request.form['genero']
+    director = request.form['director']
     duracion = request.form['duracion']
     imagen = request.files['imagen']
-    atp = request.form['atp']
-    detalle = request.form['detalle']
+    trailer = request.form['trailer']
+    clasificacion = request.form['clasificacion']
+    sinopsis = request.form['sinopsis']
     nombre_imagen = ""
-
     # Genero el nombre de la imagen
     nombre_imagen = secure_filename(imagen.filename) 
     nombre_base, extension = os.path.splitext(nombre_imagen) 
     nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}" 
 
-    nuevo_codigo = catalogo.agregar_pelicula(nombre, genero, duracion, nombre_imagen, atp, detalle)
+    nuevo_codigo = catalogo.agregar_pelicula(nombre, genero, director, duracion, nombre_imagen, trailer, clasificacion, sinopsis)
     if nuevo_codigo:    
         imagen.save(os.path.join(ruta_destino, nombre_imagen))
         return jsonify({"mensaje": "Pelicula agregada correctamente.", "codigo": nuevo_codigo, "imagen": nombre_imagen}), 201
@@ -131,11 +138,13 @@ def agregar_pelicula():
 @app.route("/pelicula/<int:codigo>", methods=["PUT"])
 def modificar_pelicula(codigo):
     #Se recuperan los nuevos datos del formulario
-    nueva_nombre = request.form.get("nombre")
-    nueva_genero = request.form.get("genero")
-    nuevo_duracion = request.form.get("duracion")
-    nuevo_atp = request.form.get("atp")
-    nuevo_detalle = request.form.get("detalle")
+    nuevo_nombre = request.form.get("nombre")
+    nuevo_genero = request.form.get("genero")
+    nuevo_director = request.form.get("director")
+    nueva_duracion = request.form.get("duracion")
+    nuevo_trailer = request.form.get("trailer")
+    nueva_clasificacion = request.form.get("clasificacion")
+    nueva_sinopsis = request.form.get("sinopsis")
     
     # Verifica si se proporcionó una nueva imagen
     if 'imagen' in request.files:
@@ -164,7 +173,7 @@ def modificar_pelicula(codigo):
             nombre_imagen = pelicula["imagen_url"]
 
 # Se llama al método modificar_producto pasando el codigo del producto y los nuevos datos.
-    if catalogo.modificar_pelicula(codigo, nueva_nombre, nueva_genero, nuevo_duracion, nombre_imagen, nuevo_atp, nuevo_detalle):
+    if catalogo.modificar_pelicula(codigo, nuevo_nombre, nuevo_genero, nuevo_director, nueva_duracion, nombre_imagen, nuevo_trailer, nueva_clasificacion, nueva_sinopsis):
         return jsonify({"mensaje": "pelicula modificada"}), 200
     else:
         return jsonify({"mensaje": "pelicula no encontrada"}), 403
@@ -186,7 +195,6 @@ def eliminar_pelicula(codigo):
             return jsonify({"mensaje": "Error al eliminar la pelicula"}), 500
     else:
         return jsonify({"mensaje": "pelicula no encontrada"}), 404
-
 
 if __name__ == "__main__":
     app.run(debug=True)

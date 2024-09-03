@@ -1,5 +1,5 @@
-// const URL = "http://127.0.0.1:5000/"
-const URL = "https://sinost.pythonanywhere.com/";
+const URL = "http://127.0.0.1:5000/"
+//const URL = "https://sinost.pythonanywhere.com/";
 
 // Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
 //const URL = "https://USUARIO.pythonanywhere.com/"
@@ -8,20 +8,22 @@ const URL = "https://sinost.pythonanywhere.com/";
 let codigo = "";
 let nombre = "";
 let genero = "";
+let director = "";
 let duracion = "";
-let atp = "";
-let detalle = "";
+let trailer_url = "";
+let clasificacion = "";
+let sinopsis = "";
 let imagen_url = "";
 let imagenSeleccionada = null;
 let imagenUrlTemp = null;
 let mostrarDatosProducto = false;
 
-document.getElementById("form-obtener-producto").addEventListener("submit", obtenerProducto);
+document.getElementById("form-obtener-pelicula").addEventListener("submit", obtenerPelicula);
 document.getElementById("form-guardar-cambios").addEventListener("submit", guardarCambios);
 document.getElementById("nuevaImagen").addEventListener("change", seleccionarImagen);
 
 // Se ejecuta cuando se envía el formulario de consulta. Realiza una solicitud GET a la API y obtiene los datos del producto correspondiente al código ingresado.
-function obtenerProducto(event) {
+function obtenerPelicula(event) {
   event.preventDefault();
   codigo = document.getElementById("codigo").value;
   fetch(URL + "pelicula/" + codigo)
@@ -35,9 +37,11 @@ function obtenerProducto(event) {
     .then((data) => {
       nombre = data.nombre;
       genero = data.genero;
+      director = data.director;
       duracion = data.duracion;
-      atp = data.atp;
-      detalle = data.detalle;
+      clasificacion = data.clasificacion;
+      trailer_url = data.trailer_url;
+      sinopsis = data.sinopsis;
       imagen_url = data.imagen_url;
       mostrarDatosProducto = true; //Activa la vista del segundo formulario
       mostrarFormulario();
@@ -53,21 +57,24 @@ function obtenerProducto(event) {
     });
 }
 
-// Muestra el formulario con los datos del producto
+// Muestra el formulario con los datos de la pelicula
 function mostrarFormulario() {
   if (mostrarDatosProducto) {
     document.getElementById("nombre").value = nombre;
     document.getElementById("genero").value = genero;
+    document.getElementById("director").value = director;
     document.getElementById("duracion").value = duracion;
-    document.getElementById("atp").value = atp;
-    document.getElementById("detalle").value = detalle;
+    document.getElementById("clasificacion").value = clasificacion;
+    document.getElementById("trailer").value = trailer_url;
+    document.getElementById("sinopsis").value = sinopsis;
 
     const imagenActual = document.getElementById("imagen-actual");
     if (imagen_url && !imagenSeleccionada) {
       // Verifica si imagen_url no está vacía y no se ha seleccionado una imagen
 
-      imagenActual.src = "https://www.pythonanywhere.com/user/Sinost/files/home/Sinost/mysite/static/imagenes/" + imagen_url;
+      imagenActual.src = "./static/imagenes/" + imagen_url;
       //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+      //https://www.pythonanywhere.com/user/Sinost/files/home/Sinost/mysite/static/imagenes/
       //imagenActual.src = 'https://www.pythonanywhere.com/user/USUARIO/files/home/USUARIO/mysite/static/imagenes/' + imagen_url;
       imagenActual.style.display = "block"; // Muestra la imagen actual
     } else {
@@ -99,9 +106,11 @@ function guardarCambios(event) {
   formData.append("codigo", codigo);
   formData.append("nombre", document.getElementById("nombre").value);
   formData.append("genero", document.getElementById("genero").value);
-  formData.append("atp", document.getElementById("atp").value);
+  formData.append("director", document.getElementById("director").value);
   formData.append("duracion", document.getElementById("duracion").value);
-  formData.append("detalle", document.getElementById("detalle").value);
+  formData.append("clasificacion", document.getElementById("clasificacion").value);
+  formData.append("trailer", document.getElementById("trailer").value);
+  formData.append("sinopsis", document.getElementById("sinopsis").value);
 
   // Si se ha seleccionado una imagen nueva, la añade al formData.
   if (imagenSeleccionada) {
@@ -150,11 +159,13 @@ function limpiarFormulario() {
   document.getElementById("codigo").value = "";
   document.getElementById("nombre").value = "";
   document.getElementById("genero").value = "";
+  document.getElementById("director").value = "";
   document.getElementById("duracion").value = "";
-  document.getElementById("atp").value = "";
   document.getElementById("nuevaImagen").value = "";
-  document.getElementById("detalle").value = "";
-
+  document.getElementById("trailer").value = "";
+  document.getElementById("clasificacion").value = "";
+  document.getElementById("sinopsis").value = "";
+  
   const imagenActual = document.getElementById("imagen-actual");
   imagenActual.style.display = "none";
 
@@ -164,9 +175,11 @@ function limpiarFormulario() {
   codigo = "";
   nombre = "";
   genero = "";
+  director = "";
   duracion = "";
-  atp = "";
-  detalle = "";
+  trailer = "";
+  clasificacion = "";
+  sinopsis = "";
   imagen_url = "";
   imagenSeleccionada = null;
   imagenUrlTemp = null;

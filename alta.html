@@ -17,12 +17,15 @@
         <h2 class="difuminado">Agregar pelicula</h2>
         <h2 id="mensajeError"></h2>
         <div class="contact_form">
-          <form enctype="multipart/form-data" id="formulario" onsubmit="return validarFormulario()" class="formulario">
+          <form enctype="multipart/form-data" id="formulario" onsubmit="" class="formulario">
             <label for="nombre" class="formulario-label">Nombre </label>
             <input class="formulario-input" type="text" name="nombre" id="nombre" placeholder="Nombre pelicula" />
 
             <label for="genero" class="formulario-label">Genero </label>
             <input class="formulario-input" type="text" name="genero" id="genero" placeholder="Genero pelicula" />
+            
+            <label for="director" class="formulario-label">Director </label>
+            <input class="formulario-input" type="text" name="director" id="director" placeholder="Director pelicula" />
 
             <label for="duracion" class="formulario-label">Duracion </label>
             <input class="formulario-input" type="number" name="duracion" id="duracion" placeholder="Duracion pelicula" />
@@ -30,11 +33,19 @@
             <label for="imagen" class="formulario-label">Imagen </label>
             <input class="formulario-input" type="file" name="imagen" id="imagen" placeholder="Suba la foto" />
 
-            <label for="atp" class="formulario-label">Apta publico </label>
-            <input class="formulario-input" type="text" name="atp" id="atp" placeholder="Apta todo publico? si/no" />
-
-            <label for="detalle" class="formulario-label">URL</label>
-            <input class="formulario-input" type="text" name="detalle" id="detalle" placeholder="www.codocinema.com/nombre (escriba el nombre)" />
+            <label for="clasificacion" class="formulario-label">Clasificacion </label>
+            <select class="formulario-input" type="text" name="clasificacion" id="clasificacion" placeholder="Clasificacion pelicula" />
+              <option value="" class="hidden">Seleccione una clasificacion</option>
+              <option value="ATP">ATP</option>
+              <option value="+13">+13</option>
+              <option value="+16">+16</option>
+              <option value="+18">+18</option>
+            </select>
+            <label for="trailer" class="formulario-label">Trailer URL</label>
+            <input class="formulario-input" type="text" name="trailer" id="trailer" placeholder="Trailer url" />
+            
+            <label for="sinopsis" class="formulario-label">Sinopsis </label>
+            <textarea id="sinopsis" name="sinopsis" rows="5" cols="10"></textarea><br>
 
             <input class="formulario-input login" type="submit" value="Agregar"></input>
             <a class="formulario-input volver" href="admin.html">Volver</a>

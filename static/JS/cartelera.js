@@ -1,5 +1,6 @@
 // URL base de la API
-const URL = "https://sinost.pythonanywhere.com/";
+const URL = "http://127.0.0.1:5000/"
+//const URL = "https://sinost.pythonanywhere.com/";
 
 // Realizamos la solicitud GET al servidor para obtener todas las películas.
 fetch(URL + "pelicula")
@@ -18,17 +19,14 @@ fetch(URL + "pelicula")
       let figure = document.createElement("figure");
       figure.className = "cartelera-figure";
 
+      // El codigo siguiente se reemplaza a la hora de conectar con python anywhere
+      //<img src=https://www.pythonanywhere.com/user/Sinost/files/home/Sinost/mysite/static/imagenes/${pelicula.imagen_url} />
+      //<a href="https://codocinema.netlify.app/${pelicula.detalle}.html">
       figure.innerHTML = `
-        <a href="https://codocinema.netlify.app/${pelicula.detalle}.html">
-            <img src=https://www.pythonanywhere.com/user/Sinost/files/home/Sinost/mysite/static/imagenes/${pelicula.imagen_url} />
-            <figcaption>Nombre: ${pelicula.nombre}</figcaption>
-            <p>Genero: ${pelicula.genero}</p>
-            <p>Duracion: ${pelicula.duracion}min</p>
-            <p>ATP: ${pelicula.atp}</p>
-            
-        </a>
-        `;
-
+        <a href="http://127.0.0.1:5500/detalles.html?id=${pelicula.codigo}">
+            <img src=./static/imagenes/${pelicula.imagen_url} />
+            <figcaption>${pelicula.nombre}</figcaption>
+        </a>`;
       // Añadimos la nueva figura al contenedor
       container.appendChild(figure);
     }
