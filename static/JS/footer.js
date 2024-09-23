@@ -1,7 +1,7 @@
 let footer = `<div class="footer-principal">
   <div class="navLogo">
       <a href="index.html"><img class="logo" src="/static/imagenes/LogoCine.jpeg" alt="logo cine" /></a>
-      <h1>Codo Cinema</h1>
+      <h1 id="footer_logo">Codo Cinema</h1>
   </div>
 
   <div class="preguntas">
