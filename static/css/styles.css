@@ -797,12 +797,13 @@ footer p {
 .disable {
     background-color: #222222;
     color: #828282;
+    cursor: default;
 }
 
 .disable:hover {
     background-color: #414040;
     color: black;
-    border: none;
+    outline: none;
 }
 
 .hidden {
