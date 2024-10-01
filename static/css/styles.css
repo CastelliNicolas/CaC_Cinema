@@ -80,7 +80,7 @@ nav {
     display: flex;
     align-items: center; /* Alinea el contenido de los li verticalmente */
     justify-content: center; /* Centra horizontalmente si es necesario */
-    height: 100px; /* Define una altura uniforme */
+    height: 45px; /* Define una altura uniforme */
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
     transition: border-color 0.5s ease-out;
@@ -542,7 +542,7 @@ footer p {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 4/3;
     margin: auto;
 }
 
@@ -566,7 +566,7 @@ footer p {
     display: block;
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .slide-open:checked + .slide-item {
@@ -744,8 +744,10 @@ footer p {
 .detallePeli img {
     width: 180px;
     height: 270px;
-    border-radius: 10px;
+    border-radius: 20px;
     transition: transform 0.5s ease, filter 0.6s ease-out;
+    max-width: 100%;
+    padding: 10px;
 }
 
 .estrenos-figure img:hover,
@@ -790,7 +792,8 @@ footer p {
 
 .promociones img {
     width: 350px;
-    padding: 10px 0;
+    padding: 15px;
+    max-width: 100%;
 }
 
 /***********Compra****************************************************/
@@ -1139,8 +1142,12 @@ footer p {
 }
 
 @media only screen and (min-width: 768px) {
-
-
+    .slide-inner{
+        aspect-ratio: default;
+    }
+    .slide-item img{
+        object-fit: cover;
+    }
     /***************difuminado*************/
 
     .difuminado {
@@ -1342,6 +1349,9 @@ footer p {
         list-style: none;
         align-items: center;
 
+    }
+    .nav-list li{
+        height: 100px;
     }
 
     .nav-list li a {
