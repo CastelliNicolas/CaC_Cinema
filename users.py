@@ -1,24 +1,13 @@
 #--------------------------------------------------------------------
-# Instalar con pip install Flask
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Blueprint
 
-# Instalar con pip install flask-cors
-from flask_cors import CORS, cross_origin
-
-# Instalar con pip install mysql-connector-python
 import mysql.connector
 
-# Si es necesario, pip install Werkzeug
 from werkzeug.utils import secure_filename
 
-# No es necesario instalar, es parte del sistema standard de Python
-import os
-import time
 #--------------------------------------------------------------------
 
-
-app = Flask(__name__)
-CORS(app)  # Esto habilitará CORS para todas las rutas
+usuarios_bp = Blueprint("usuarios", __name__)
 
 
 class Usuario:
@@ -88,12 +77,12 @@ class Usuario:
 # Usuarios test
 #----------------------------------------------------------------------------
 usuario = Usuario(host="localhost", user="root", password="", database="usuario")
-@app.route("/usuario", methods=["GET"])
+@usuarios_bp.route("/usuario", methods=["GET"])
 def listar_usuarios():
     usuarios = usuario.listar_usuarios()
     return jsonify(usuarios)
 
-@app.route("/usuario/<int:id>", methods=["GET"])
+@usuarios_bp.route("/usuario/<int:id>", methods=["GET"])
 def mostrar_usuario(id):
     usuario_data = usuario.consultar_usuario(id)
     if usuario_data:
@@ -101,7 +90,7 @@ def mostrar_usuario(id):
     else:
         return "Usuario no encontrado", 404
 
-@app.route("/usuario", methods=["POST"])
+@usuarios_bp.route("/usuario", methods=["POST"])
 def agregar_usuario():
     print(request.form)
     nombre = request.form['nombre']
@@ -117,7 +106,7 @@ def agregar_usuario():
     else:
         return jsonify({"mensaje": "Error al agregar el usuario."}), 500
 
-@app.route("/usuario/<int:id>", methods=["PUT"])
+@usuarios_bp.route("/usuario/<int:id>", methods=["PUT"])
 def modificar_usuario(id):
     nuevo_nombre = request.form.get("nombre")
     nuevo_apellido = request.form.get("apellido")
@@ -131,7 +120,7 @@ def modificar_usuario(id):
     else:
         return jsonify({"mensaje": "Usuario no encontrado"}), 403
 
-@app.route("/usuario/<int:id>", methods=["DELETE"])
+@usuarios_bp.route("/usuario/<int:id>", methods=["DELETE"])
 def eliminar_usuario(id):
     if usuario.eliminar_usuario(id):
         return jsonify({"mensaje": "Usuario eliminado"}), 200
@@ -142,4 +131,4 @@ def eliminar_usuario(id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    usuarios_bp.run(debug=True)
