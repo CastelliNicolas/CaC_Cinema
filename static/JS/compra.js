@@ -81,11 +81,16 @@ let selectCine = document.getElementById("selection-cine");
 let selectFilm = document.getElementById("selection-movie");
 let selectHour = document.getElementById("selection-horario");
 let buttonBuy = document.getElementById("btn-comprar");
+const userLoggedIn = localStorage.getItem("userLoggedIn");
 function verificarSelection() {
   if (selectCine.value && selectFilm.value && selectHour.value) {
     console.log("TRUE");
     buttonBuy.classList.remove("disable");
-    buttonBuy.setAttribute("href", "sesion.html");
+    if(userLoggedIn){
+      buttonBuy.setAttribute("href", "pago.html");
+    } else{
+      buttonBuy.setAttribute("href", "sesion.html");
+    }
   }
 }
 selectCine.addEventListener("change", verificarSelection);

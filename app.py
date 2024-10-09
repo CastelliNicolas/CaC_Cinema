@@ -4,6 +4,7 @@ from peliculas import peliculas_bp
 from flask_cors import CORS
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "233456"
 CORS(app)
 
 # Registrar los Blueprints

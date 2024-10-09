@@ -1,5 +1,5 @@
 #--------------------------------------------------------------------
-from flask import Flask, request, jsonify, Blueprint
+from flask import request, jsonify, Blueprint, session
 
 import mysql.connector
 
@@ -51,7 +51,11 @@ class Usuario:
     def consultar_usuario(self, id):
         self.cursor.execute(f"SELECT * FROM usuario WHERE id = {id}")
         return self.cursor.fetchone()
-
+    
+    def verificar_usuario(self, email, password):
+        self.cursor.execute(f"SELECT * FROM usuario WHERE email = %s AND contraseña = %s", (email, password))
+        return self.cursor.fetchone()
+    
     def agregar_usuario(self, nombre, apellido, email, contraseña, celular, genero, fecha_nacimiento):
         sql = "INSERT INTO usuario (nombre, apellido, email, contraseña, celular, genero, fecha_nacimiento) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         valores = (nombre, apellido, email, contraseña, celular, genero, fecha_nacimiento)
@@ -127,6 +131,24 @@ def eliminar_usuario(id):
     else:
         return jsonify({"mensaje": "Usuario no encontrado"}), 404
 
+@usuarios_bp.route("/login", methods=["POST"])
+def login_usuario():
+    
+    data = request.get_json()  
+    email = data.get("email")
+    password = data.get("password")
+
+    print(f"Email recibido: {email}")
+    print(f"Password recibido: {password}")
+    if not email or not password:
+        return jsonify({"error": "Faltan el email o la contraseña"}), 400
+    # Verificar en la base de datos si el usuario es válido
+    user = usuario.verificar_usuario(email, password)
+    if user:
+        session["user_id"] = user["id"]  # Guardar el id del usuario en la sesión
+        return jsonify({"id": user["id"], "nombre": user["nombre"]}), 200
+    else:
+        return jsonify({"message": "Usuario o contraseña incorrectos"}), 401
 
 
 

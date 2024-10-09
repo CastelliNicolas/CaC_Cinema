@@ -113,6 +113,7 @@ nav {
 
 .navLogin {
     list-style: none;
+    width: 190px;
 }
 
 .navLogin a {
@@ -137,7 +138,7 @@ nav {
     background-color: var(--fondo);
 }
 
-.login-icon {
+.login-icon, .profile-icon {
     filter: invert(100%);
     width: 30px;
     margin-right: 10px;

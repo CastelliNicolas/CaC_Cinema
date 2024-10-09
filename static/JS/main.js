@@ -25,8 +25,5 @@ function changeSlide() {
 }
 // Cambia la diapositiva automáticamente cada 3 segundos
 setInterval(changeSlide, 10000); // Cambia el valor (3000) para ajustar el tiempo (3 segundos)
-// Compra //
-let selectCine = document.getElementById("selection-cine");
-let selectFilm = document.getElementById("selection-peli");
-let selectHour = document.getElementById("selection-horario");
-let buttonBuy = document.getElementById("btn-comprar");
+
+

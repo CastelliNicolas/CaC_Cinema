@@ -14,8 +14,28 @@ let header = `<button id="abrir" class="abrir-menu"><i class="bi bi-list"></i></
     <li><a href="contacto.html">Contacto</a></li>
   </ul>
   <div class="navLogin">
-    <a href="sesion.html"> <img class="login-icon" src="/static/imagenes/login.png" alt="logo inicio sesion" /> Iniciar Sesion</a>
+    <a href="sesion.html" id="login-button"> <img class="login-icon" src="/static/imagenes/login.png" alt="logo inicio sesion" /> Iniciar Sesion</a>
+    <a href="perfil.html" id="profile-button" class="profile-button" style="display:none;"><img class="profile-icon" src="/static/imagenes/user_icon.svg" alt="logo perfil" /> Perfil
+    </a>
   </div>
 </nav>`;
 
 document.getElementById("idHeader").innerHTML = header;
+
+// Login //
+document.addEventListener("DOMContentLoaded", function() {
+  // Verificar si el usuario está logueado
+  const userLoggedIn = localStorage.getItem("userLoggedIn"); // Verificar si el usuario está logueado
+  const loginButton = document.getElementById("login-button");
+  const profileButton = document.getElementById("profile-button");
+
+  if (userLoggedIn) {
+      // Cambiar el botón de "Iniciar sesión" por "Perfil"
+      loginButton.style.display = "none";
+      profileButton.style.display = "flex";
+  } else{
+     // Si no está logueado, mostrar el botón de iniciar sesión
+     //loginButton.style.display = "inline-block";
+     profileButton.style.display = "none";
+  }
+});
