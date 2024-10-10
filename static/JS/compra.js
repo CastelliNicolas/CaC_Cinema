@@ -90,6 +90,7 @@ function verificarSelection() {
       buttonBuy.setAttribute("href", "pago.html");
     } else{
       buttonBuy.setAttribute("href", "sesion.html");
+      localStorage.setItem("rutaPosteriorLogin", "/pago.html");
     }
   }
 }

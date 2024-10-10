@@ -145,12 +145,22 @@ def login_usuario():
     # Verificar en la base de datos si el usuario es válido
     user = usuario.verificar_usuario(email, password)
     if user:
-        session["user_id"] = user["id"]  # Guardar el id del usuario en la sesión
+        session["user_id"] = user["id"]
+        print(session)
+         # Guardar el id del usuario en la sesión
         return jsonify({"id": user["id"], "nombre": user["nombre"]}), 200
     else:
         return jsonify({"message": "Usuario o contraseña incorrectos"}), 401
 
-
+@usuarios_bp.route("/perfil", methods=["GET"])
+def perfil_usuario():
+    print(session)
+    if "user_id" in session:
+        user_id = session["user_id"]
+        user_info = usuario.consultar_usuario(user_id)
+        return jsonify(user_info), 200
+    else:
+        return jsonify({"message": "Error al obtener informacion del usuario"}), 401
 
 if __name__ == "__main__":
     usuarios_bp.run(debug=True)

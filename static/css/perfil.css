@@ -1,0 +1,41 @@
+.container-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.perfil-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--fondo);
+    width: 20%;
+    padding: 10px;
+    height: 80vh;
+    margin: 20px 0;
+}
+.perfil-con-box{
+    display: flex;
+    flex-direction: column;
+}
+.perfil-container .perfil-con-box:first-child{
+    align-items: center;
+}
+
+.perfil-con-box input{
+    background-color: var(--fondo);
+    border: none;
+    border-bottom: 1px solid var(--botones-color);
+    color: var(--texto);
+    font-size: 1.2rem;
+}
+.perfil-con-box input:focus{
+    outline: none;
+}
+
+.perfil-container .profile-icon{
+    width: 70%;
+    margin: 0;
+}
