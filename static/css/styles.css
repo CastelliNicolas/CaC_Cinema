@@ -660,6 +660,7 @@ footer p {
     font-size: 0.7rem;
     text-transform: uppercase;
     transition: var(--transition-color);
+    cursor: pointer;
 }
 
 .btncomprar:hover {

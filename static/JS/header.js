@@ -25,7 +25,7 @@ document.getElementById("idHeader").innerHTML = header;
 // Login //
 document.addEventListener("DOMContentLoaded", function() {
   // Verificar si el usuario está logueado
-  const userLoggedIn = localStorage.getItem("userLoggedIn"); // Verificar si el usuario está logueado
+  const userLoggedIn = localStorage.getItem("userID"); // Verificar si el usuario está logueado
   const loginButton = document.getElementById("login-button");
   const profileButton = document.getElementById("profile-button");
 

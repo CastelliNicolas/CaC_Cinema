@@ -24,7 +24,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event){
     .then(function (data) {
         // Aquí puedes manejar los datos JSON recibidos del servidor
         console.log("Success:", data);
-        localStorage.setItem("userLoggedIn", true);
+        localStorage.setItem("userID", data.id);
         const rutaPosteriorLogin = localStorage.getItem("rutaPosteriorLogin");
         if (rutaPosteriorLogin) {
             // Redirigimos a la página de pago u otra
@@ -32,7 +32,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event){
             // Borramos la ruta y los datos de compra del Local Storage
             localStorage.removeItem("rutaPosteriorLogin");
         }else{
-            //window.location.href = "index.html";
+            window.location.href = "index.html";
         }
     })
     .catch(function (error) {

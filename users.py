@@ -63,9 +63,10 @@ class Usuario:
         self.conn.commit()
         return self.cursor.lastrowid
 
-    def modificar_usuario(self, id, nuevo_nombre, nuevo_apellido, nuevo_email, nuevo_password, nuevo_celular, nuevo_genero, nuevo_fecha_nacimiento):
-        sql = "UPDATE usuario SET nombre = %s, apellido = %s, email = %s, contraseña = %s, celular = %s, genero = %s, fecha_nacimiento = %s WHERE id = %s"
-        valores = (nuevo_nombre, nuevo_apellido, nuevo_email, nuevo_password, nuevo_celular, nuevo_genero, nuevo_fecha_nacimiento, id)
+    def modificar_usuario(self, id, cambios):
+        set_clause = ", ".join([f"{col} = %s" for col in cambios.keys()])
+        sql = f"UPDATE usuario SET {set_clause} WHERE id = %s"
+        valores = list(cambios.values()) + [id]
         self.cursor.execute(sql, valores)
         self.conn.commit()
         return self.cursor.rowcount > 0
@@ -112,17 +113,36 @@ def agregar_usuario():
 
 @usuarios_bp.route("/usuario/<int:id>", methods=["PUT"])
 def modificar_usuario(id):
-    nuevo_nombre = request.form.get("nombre")
-    nuevo_apellido = request.form.get("apellido")
-    nuevo_email = request.form.get("email")
-    nuevo_password = request.form.get("password")
-    nuevo_celular = request.form.get("celular")
-    nuevo_genero = request.form.get("genero")
-    nuevo_fecha_nacimiento = request.form.get("fecha_nacimiento")
-    if usuario.modificar_usuario(id, nuevo_nombre, nuevo_apellido, nuevo_email, nuevo_password, nuevo_celular, nuevo_genero, nuevo_fecha_nacimiento):
+    print(request.get_json())
+    data = request.get_json()
+    
+    cambios = {}
+    if "nombre" in data:
+        cambios["nombre"] = data["nombre"]
+    if "email" in data:
+        cambios["email"] = data["email"]
+    if "celular" in data:
+        cambios["celular"] = data["celular"]
+    
+
+    if not cambios:
+        return jsonify({"error": "No se realizaron cambios"}), 400
+
+    if usuario.modificar_usuario(id, cambios):
+        return jsonify({"mensaje": "Usuario modificado"}), 200
+    else:
+        return jsonify({"error": "Error al modificar usuario"}), 400
+    """""
+    nuevo_nombre = data.get("nombre")
+    nuevo_email = data.get("email")
+    nuevo_celular = data.get("celular")
+    if not nuevo_email:
+        return jsonify({"error": "El campo email no puede estar vacío"}), 400
+    if usuario.modificar_usuario(id, nuevo_nombre, nuevo_email, nuevo_celular):
         return jsonify({"mensaje": "Usuario modificado"}), 200
     else:
         return jsonify({"mensaje": "Usuario no encontrado"}), 403
+    """
 
 @usuarios_bp.route("/usuario/<int:id>", methods=["DELETE"])
 def eliminar_usuario(id):

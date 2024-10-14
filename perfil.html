@@ -23,15 +23,27 @@
                 </div>
                 <div class="perfil-con-box">
                     <label for="nombre-perfil">Nombre</label>
-                    <input type="text" name="name" id="nombre-perfil">
+                    <div class="perfil-input">
+                        <input type="text" name="name" id="nombre-perfil" disabled>
+                        <button id="btn-perfil-edit-nm"><img src="/static/imagenes/iconmonstr-pencil-14.svg" alt="editar"></button>
+                    </div>
                 </div>
                 <div class="perfil-con-box">
                     <label for="correo-perfil">Correo</label>
-                    <input type="text" name="correo" id="correo-perfil">
+                    <div class="perfil-input">
+                        <input type="text" name="correo" id="correo-perfil" disabled>
+                        <button id="btn-perfil-edit-em"><img src="/static/imagenes/iconmonstr-pencil-14.svg" alt="editar"></button>
+                    </div>
                 </div>
                 <div class="perfil-con-box">
                     <label for="cel-perfil">Celular</label>
-                    <input type="text" name="correo" id="cel-perfil">
+                    <div class="perfil-input">
+                        <input type="text" name="correo" id="cel-perfil" disabled autocomplete="off">
+                        <button id="btn-perfil-edit-tl"><img src="/static/imagenes/iconmonstr-pencil-14.svg" alt="editar"></button>
+                    </div>
+                </div>
+                <div class="perfil-con-box">
+                    <button class="btncomprar" id="btn-perfil-save">Guardar cambios</button>
                 </div>
             </div>
         </div>

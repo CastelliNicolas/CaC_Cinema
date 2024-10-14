@@ -11,10 +11,10 @@
     justify-content: space-around;
     align-items: center;
     background-color: var(--fondo);
-    width: 20%;
-    padding: 10px;
-    height: 80vh;
+    width: 30%;
+    height: 100vh;
     margin: 20px 0;
+    gap: 50px;
 }
 .perfil-con-box{
     display: flex;
@@ -29,10 +29,30 @@
     border: none;
     border-bottom: 1px solid var(--botones-color);
     color: var(--texto);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 .perfil-con-box input:focus{
     outline: none;
+}
+
+.perfil-con-box label{
+    color: lightgray;
+    font-size: 0.9rem;
+}
+
+.perfil-input button{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.perfil-input{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.perfil-con-box button img{
+    filter: invert(100%);
 }
 
 .perfil-container .profile-icon{
