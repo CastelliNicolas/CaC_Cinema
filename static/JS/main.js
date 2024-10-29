@@ -27,3 +27,6 @@ function changeSlide() {
 setInterval(changeSlide, 10000); // Cambia el valor (3000) para ajustar el tiempo (3 segundos)
 
 
+//setTimeout( () => {
+//  localStorage.removeItem("userID")
+//}, 5)

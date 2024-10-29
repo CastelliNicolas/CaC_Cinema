@@ -19,10 +19,16 @@
         <div class="iniciar">
           <h2>Ingresa tu cuenta</h2>
           <form class="formulario" id="loginForm">
-            <label class="formulario-label" for="email">Email</label>
-            <input class="formulario-input" id="email" name="email" type="email" />
-            <label class="formulario-label" for="password">Contraseña</label>
-            <input class="formulario-input" id="password" name="password" type="password" />
+            <div class="form-input-label">
+              <label class="formulario-label" for="email">Email</label>
+              <input class="formulario-input" id="email" name="email" type="email" />
+              <p class="formulario-error" id="formulario-error-email">*Correo no valido</p>
+            </div>
+            <div class="form-input-label">
+              <label class="formulario-label" for="password">Contraseña</label>
+              <input class="formulario-input" id="password" name="password" type="password" />
+              <p class="formulario-error" id="formulario-error-pass">*Contraseña no valida</p>
+            </div>
             <p id="error-message">Por favor, verifica tu correo y contraseña.</p>
             <button class="formulario-input login" type="submit">Entrar</button>
             <!-- <input class="formulario-input login" type="submit" value="Login" /> -->

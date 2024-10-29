@@ -30,9 +30,11 @@
     border-bottom: 1px solid var(--botones-color);
     color: var(--texto);
     font-size: 1.3rem;
+    transition: box-shadow 0.4s ease-out;
 }
 .perfil-con-box input:focus{
     outline: none;
+    box-shadow: 0px 5px 7px -5px var(--botones-color);
 }
 
 .perfil-con-box label{

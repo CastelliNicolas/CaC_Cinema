@@ -52,8 +52,8 @@ class Usuario:
         self.cursor.execute(f"SELECT * FROM usuario WHERE id = {id}")
         return self.cursor.fetchone()
     
-    def verificar_usuario(self, email, password):
-        self.cursor.execute(f"SELECT * FROM usuario WHERE email = %s AND contraseña = %s", (email, password))
+    def consultar_usuario_email(self, email):
+        self.cursor.execute(f"SELECT * FROM usuario WHERE email = %s", (email,))
         return self.cursor.fetchone()
     
     def agregar_usuario(self, nombre, apellido, email, contraseña, celular, genero, fecha_nacimiento):
@@ -125,24 +125,10 @@ def modificar_usuario(id):
         cambios["celular"] = data["celular"]
     
 
-    if not cambios:
-        return jsonify({"error": "No se realizaron cambios"}), 400
-
     if usuario.modificar_usuario(id, cambios):
         return jsonify({"mensaje": "Usuario modificado"}), 200
     else:
         return jsonify({"error": "Error al modificar usuario"}), 400
-    """""
-    nuevo_nombre = data.get("nombre")
-    nuevo_email = data.get("email")
-    nuevo_celular = data.get("celular")
-    if not nuevo_email:
-        return jsonify({"error": "El campo email no puede estar vacío"}), 400
-    if usuario.modificar_usuario(id, nuevo_nombre, nuevo_email, nuevo_celular):
-        return jsonify({"mensaje": "Usuario modificado"}), 200
-    else:
-        return jsonify({"mensaje": "Usuario no encontrado"}), 403
-    """
 
 @usuarios_bp.route("/usuario/<int:id>", methods=["DELETE"])
 def eliminar_usuario(id):
@@ -163,14 +149,16 @@ def login_usuario():
     if not email or not password:
         return jsonify({"error": "Faltan el email o la contraseña"}), 400
     # Verificar en la base de datos si el usuario es válido
-    user = usuario.verificar_usuario(email, password)
-    if user:
-        session["user_id"] = user["id"]
-        print(session)
+    user = usuario.consultar_usuario_email(email)
+    if not user:
+        return jsonify({"error": "Correo incorrecto"}), 401
+    
+    if not password == user["contraseña"]:
+        return jsonify({"error": "Contraseña incorrecta"}), 401
+    session["user_id"] = user["id"]
+    print(session)
          # Guardar el id del usuario en la sesión
-        return jsonify({"id": user["id"], "nombre": user["nombre"]}), 200
-    else:
-        return jsonify({"message": "Usuario o contraseña incorrectos"}), 401
+    return jsonify({"id": user["id"], "nombre": user["nombre"]}), 200
 
 @usuarios_bp.route("/perfil", methods=["GET"])
 def perfil_usuario():
@@ -181,6 +169,13 @@ def perfil_usuario():
         return jsonify(user_info), 200
     else:
         return jsonify({"message": "Error al obtener informacion del usuario"}), 401
+
+@usuarios_bp.route("/logout", methods=["POST"])
+def logout_usuario():
+    session.pop("user_id", None)
+    return jsonify({"message": "Logout exitoso"}), 200
+
+
 
 if __name__ == "__main__":
     usuarios_bp.run(debug=True)

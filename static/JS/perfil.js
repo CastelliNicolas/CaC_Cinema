@@ -1,9 +1,12 @@
 const URL = "http://127.0.0.1:5000/"
 
 // V
-let nombre = "";
-let correo = "";
-let celular = "";
+let btnGuardar = document.getElementById("btn-perfil-save");
+let nombreInput = document.getElementById("nombre-perfil");
+let correoInput = document.getElementById("correo-perfil");
+let celularInput = document.getElementById("cel-perfil");
+
+let perfilGuardado = {};
 
 
 fetch(URL + "perfil",{
@@ -19,21 +22,47 @@ fetch(URL + "perfil",{
     })
     .then((data) =>{
         
+        perfilGuardado = {
+            nombre: data.nombre,
+            email: data.email,
+            celular: data.celular
+        };
+
         nombre = data.nombre;
         correo = data.email;
         celular = data.celular;
         
-        document.getElementById("nombre-perfil").value = nombre;
-        document.getElementById("correo-perfil").value = correo;
-        document.getElementById("cel-perfil").value = celular;
+        nombreInput.value = data.nombre;
+        correoInput.value = data.email;
+        celularInput.value = data.celular;
     })
     .catch(function(error){
         console.error("Error al obtener datos:", error);
     })
 
 
+// Función para verificar cambios
+function verificarCambios() {
+    const nombreModificado = nombreInput.value !== perfilGuardado.nombre;
+    const correoModificado = correoInput.value !== perfilGuardado.email;
+    const celularModificado = String(celularInput.value) !== String(perfilGuardado.celular);
+
+    // Si hubo algún cambio, habilitamos el botón
+    if((nombreModificado || correoModificado || celularModificado)){
+        btnGuardar.disabled = false;
+        btnGuardar.classList.remove("disable");
+    }
+}
+
+
+//
+nombreInput.addEventListener("input", verificarCambios);
+correoInput.addEventListener("input", verificarCambios);
+celularInput.addEventListener("input", verificarCambios);
+
+
 // PUT
-document.getElementById("btn-perfil-save").addEventListener("click", function(){
+btnGuardar.addEventListener("click", function(){
     let user_id =  localStorage.getItem("userID");
     console.log(user_id)
     console.log(nombre, correo, celular)
@@ -48,20 +77,22 @@ document.getElementById("btn-perfil-save").addEventListener("click", function(){
     console.log(`cel nuevo: ${nuevo_celular}`);
     console.log(`Son iguales: ${celular === nuevo_celular}`);
     
-    if (nuevo_nombre && nuevo_nombre !== nombre) {
+    if (nuevo_nombre !== nombre) {
         cambiosPerfil.nombre = nuevo_nombre;
         console.log("nombre true")
+        changeBtn = true;
     }
-    if (nuevo_celular && String(nuevo_celular) !== String(celular)) {
+    if (String(nuevo_celular) !== String(celular)) {
         cambiosPerfil.celular = nuevo_celular;
         console.log("cel true")
+        changeBtn = true;
     }
 
     if (Object.keys(cambiosPerfil).length === 1 && nuevo_correo === correo) {
         console.log("No se han realizado cambios.");
         return
     }
-
+    
     fetch(URL + "usuario/" + user_id,
         {method: "PUT",
         headers: {
@@ -87,15 +118,7 @@ document.getElementById("btn-perfil-save").addEventListener("click", function(){
 })
 
 
-
-
-
-
-
-
-
 // Buttons
-
 let nombreBtn = document.getElementById("btn-perfil-edit-nm");
 let emailBtn = document.getElementById("btn-perfil-edit-em");
 let celularBtn = document.getElementById("btn-perfil-edit-tl");

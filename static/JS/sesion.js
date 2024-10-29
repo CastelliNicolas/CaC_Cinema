@@ -1,8 +1,14 @@
 const URL = "http://127.0.0.1:5000/";
 
+let errorAlertPass = document.getElementById("formulario-error-pass");
+let errorAlertEmail = document.getElementById("formulario-error-email");
+
 document.getElementById("loginForm").addEventListener("submit", function(event){
     event.preventDefault();
-
+    if (errorAlertEmail.className == "formulario-error" || errorAlertPass.className == "formulario-error"){
+        errorAlertEmail.classList.add("formulario-error")
+        errorAlertPass.classList.add("formulario-error")
+    }
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
@@ -18,7 +24,14 @@ document.getElementById("loginForm").addEventListener("submit", function(event){
         if (response.ok){
             return response.json();
         } else{
-            throw new Error("Error al iniciar sesion")
+            return response.json().then(error => {
+                if(error.error == "Correo incorrecto")
+                    errorAlertEmail.classList.remove("formulario-error");
+                if(error.error == "Contraseña incorrecta"){
+                    errorAlertPass.classList.remove("formulario-error")
+                }
+                throw new Error(error.error); // Para manejar el error si es necesario
+            });
         }
     })
     .then(function (data) {
@@ -37,6 +50,6 @@ document.getElementById("loginForm").addEventListener("submit", function(event){
     })
     .catch(function (error) {
         // Código para manejar errores
-        console.error("Error al iniciar sesion:", error);
+        console.error("Error al iniciar sesion.", error);
     });
 });
