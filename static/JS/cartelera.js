@@ -23,8 +23,8 @@ fetch(URL + "pelicula")
       //<img src=https://www.pythonanywhere.com/user/Sinost/files/home/Sinost/mysite/static/imagenes/${pelicula.imagen_url} />
       //<a href="https://codocinema.netlify.app/${pelicula.detalle}.html">
       figure.innerHTML = `
-        <a href="http://127.0.0.1:5500/detalles.html?id=${pelicula.codigo}">
-            <img src=./static/imagenes/${pelicula.imagen_url} />
+        <a href="http://127.0.0.1:5500/front/detalles.html?id=${pelicula.codigo}">
+            <img src=/static/imagenes/${pelicula.imagen_url} />
             <figcaption>${pelicula.nombre}</figcaption>
         </a>`;
       // Añadimos la nueva figura al contenedor

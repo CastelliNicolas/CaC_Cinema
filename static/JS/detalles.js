@@ -22,7 +22,7 @@ if (codigo) {
                 document.getElementById("director_detalle").innerText = `Director: ${data.director}`;
                 document.getElementById("clasificacion_detalle").innerText = `Clasifcacion: ${data.clasificacion}`;
                 document.getElementById("sinopsis_detalle").innerText = data.sinopsis;
-                document.getElementById("imagen_detalle").src = `./static/imagenes/${data.imagen_url}`;
+                document.getElementById("imagen_detalle").src = `/static/imagenes/${data.imagen_url}`;
                 document.getElementById("imagen_detalle").alt = `Imagen de ${data.nombre}`;
                 document.getElementById("trailer_detalle").src = video_embed_url;
             }

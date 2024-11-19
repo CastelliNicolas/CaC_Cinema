@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modificar Peliculas</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  </head>
+  <body>
+    <header><h1>Bienvenido Administrador!</h1></header>
+    <main> <section class="busqueda">
+      <h2 class="difuminado">Modificar funcion</h2>
+      <h2 id="mensajeError"></h2>
+      <form class="form-busqueda" id="form-obtener-funcion" action="#">
+        <label class="form-label" for="search">Funcion a modificar</label>
+        <input class="form-input" type="text" name="search" id="codigo" placeholder="Buscar funcion" />
+        <input class="form-input btnbuscar" type="submit" value="Buscar" />
+        <a class="form-input btnbuscar" href="admin_funciones.html">Volver</a>
+      </form>
+    </section>
+    <section class="contacto">
+        <div class="contact_form" id="datos-funcion" style="display: none;">
+          <form action="#" method="#" id="form-guardar-cambios" onsubmit="return validarFormulario()" class="formulario">
+
+            <label for="codigo_pelicula" class="formulario-label">Codigo de Pelicula </label>
+            <select class="formulario-input" name="codigo_pelicula" id="codigo_pelicula">
+            </select>
+
+            <label for="horario" class="formulario-label">Horario </label>
+            <input class="formulario-input" type="time" name="horario" id="horario" placeholder="Horario funcion" />
+            
+            <label for="fecha" class="formulario-label">Fecha </label>
+            <input class="formulario-input" type="date" name="fecha" id="fecha" placeholder="Fecha funcion" />
+
+            <label for="codigo_cine" class="formulario-label">Cine </label>
+            <select class="formulario-input" name="codigo_cine" id="codigo_cine"></select>
+
+            <label for="sala" class="formulario-label">Sala </label>
+            <select class="formulario-input" name="sala" id="sala"></select>
+
+            <input class="formulario-input login" type="submit" value="Modificar"></input>
+            <a class="formulario-input volver" href="admin.html">Volver</a>
+          </form>
+        </div>
+    </section>
+      </main>
+
+      <script type="module" src="/static/JS/admin/funciones/modificar_funcion.js"></script>
+      <script type="module" src="/static/JS/admin/api.js"></script>
+      <script type="module" src="/static/JS/admin/utils.js"></script>
+
+  </body>
+</html>

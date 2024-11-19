@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modificar Peliculas</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  </head>
+  <body>
+    <header><h1>Bienvenido Administrador!</h1></header>
+    <main> <section class="busqueda">
+      <h2 class="difuminado">Modificar pelicula</h2>
+      <h2 id="mensajeError"></h2>
+      <form class="form-busqueda" id="form-obtener-pelicula" action="#">
+        <label class="form-label" for="search">Pelicula a modificar</label>
+        <input class="form-input" type="text" name="search" id="codigo" placeholder="Buscar película..." />
+        <input class="form-input btnbuscar" type="submit" value="Buscar" />
+        <a class="form-input btnbuscar" href="admin.html">Volver</a>
+      </form>
+    </section>
+    <section class="contacto">
+        <div class="contact_form" id="datos-producto" style="display: none;">
+          <form action="#" method="#" id="form-guardar-cambios" onsubmit="return validarFormulario()" class="formulario">
+            <label for="nombre" class="formulario-label">Nombre </label>
+            <input class="formulario-input" type="text" name="nombre" id="nombre" placeholder="Nombre pelicula" />
+
+            <label for="genero" class="formulario-label">Genero </label>
+            <input class="formulario-input" type="text" name="genero" id="genero" placeholder="Genero pelicula" />
+            
+            <label for="director" class="formulario-label">Director </label>
+            <input class="formulario-input" type="text" name="director" id="director" placeholder="Director pelicula" />
+
+            <label for="duracion" class="formulario-label">Duracion </label>
+            <input class="formulario-input" type="text" name="duracion" id="duracion" placeholder="Duracion pelicula" />
+
+            <!-- Imagen actual del producto - Debe comentarse al subirse al servidor-->
+            <img id="imagen-actual" style="max-width: 200px; display: none;">               
+            <!-- Vista previa de la nueva imagen seleccionada -->
+            <img id="imagen-vista-previa" style="max-width: 200px; display: none;">
+
+            <label for="nuevaImagen" class="formulario-label">Imagen </label>
+            <input class="formulario-input" type="file" name="nuevaImagen" id="nuevaImagen" placeholder="Suba la foto" />
+
+            <label for="clasificacion" class="formulario-label">Clasificacion </label>
+            <select class="formulario-input" type="text" name="clasificacion" id="clasificacion" placeholder="Clasificacion pelicula" />
+              <option value="" class="hidden">Seleccione una clasificacion</option>
+              <option value="ATP">ATP</option>
+              <option value="+13">+13</option>
+              <option value="+16">+16</option>
+              <option value="+18">+18</option>
+            </select>
+            <label for="trailer" class="formulario-label">Trailer URL</label>
+            <input class="formulario-input" type="text" name="trailer" id="trailer" placeholder="Trailer url" />
+            
+            <label for="sinopsis" class="formulario-label">Sinopsis </label>
+            <textarea id="sinopsis" name="sinopsis" rows="5" cols="10"></textarea><br>
+
+            <input class="formulario-input login" type="submit" value="Modificar"></input>
+            <a class="formulario-input volver" href="admin.html">Volver</a>
+          </form>
+        </div>
+    </section>
+      </main>
+
+      <script src="/static/JS/admin/peliculas/modificar_pelicula.js"></script>
+
+
+  </body>
+</html>

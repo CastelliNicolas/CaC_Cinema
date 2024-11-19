@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cartelera - Codo Cinema</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  </head>
+  <body>
+    <header id="idHeader"></header>
+    <main>
+      <h2 class="difuminado">Peliculas en Cartelera</h2>
+      <h2 id="mensajeError"></h2>
+      <section class="busqueda">
+        <form class="form-busqueda" action="#">
+          <label class="form-label" for="search">Filtrar</label>
+          <input class="form-input formulario-input" type="text" name="search" id="search" placeholder="Buscar película..." />
+          <input class="form-input btnbuscar" type="button" value="Filtrar" />
+        </form>
+      </section>
+      <div class="cartelera" id="peliculas-container">
+        <!-- <figure class="cartelera-figure">
+          <a href="jurassicpark.html">
+            <img src="/static/imagenes/jurassicparkcard.jpg" alt="Jurassic park" />
+            <figcaption>Jurassic Park</figcaption>
+            <p>Accion | 180min</p>
+          </a>
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="detallePelicula1.html"
+            ><img src="/static/imagenes/volvercard.jpeg" alt="volver al futuro" />
+            <figcaption>Volver al futuro</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="detallePelicula3.html">
+            <img src="/static/imagenes/starwars.jpg" alt="Star wars episodio 3" />
+            <figcaption>Star Wars Episodio III</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure> -->
+        <!-- <figure class="cartelera-figure">
+          <a href="#">
+            <img src="/static/imagenes/padrinocard.jpeg" alt="el padrino" />
+            <figcaption>El padrino</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#"
+            ><img src="/static/imagenes/matrix.jpg" alt="Matrix" />
+            <figcaption>Matrix</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#">
+            <img src="/static/imagenes/batman.jpeg" alt="batman" />
+            <figcaption>Batman</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#"
+            ><img src="/static/imagenes/bastardos.webp" alt="bastardos sin gloria" />
+            <figcaption>Volver al Futuro</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#">
+            <img src="/static/imagenes/forest.jpg" alt="forrest gump" />
+            <figcaption>Forrest Gump</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#">
+            <img src="/static/imagenes/gladiador.jpg" alt="Gladiador" />
+            <figcaption>Gladiador</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#"
+            ><img src="/static/imagenes/naufrago.webp" alt="Naufrago" />
+            <figcaption>Naufrago</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#"
+            ><img src="/static/imagenes/kingkong.jpg" alt="king kong" />
+            <figcaption>King Kong</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#"
+            ><img src="/static/imagenes/toystory.webp" alt="toy story" />
+            <figcaption>Toy Story</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="detallePelicula2.html">
+            <img src="/static/imagenes/starwars.jpg" alt="star wars" />
+            <figcaption>Star Wars Episodio III</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="detallePelicula3.html"
+            ><img src="/static/imagenes/startrek.jpg" alt="star trek" />
+            <figcaption>Star trek</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#">
+            <img src="/static/imagenes/pearl.jpg" alt="pearl harbor" />
+            <figcaption>Pearl Harbor</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#">
+            <img src="/static/imagenes/padrinocard.jpeg" alt="el padrino" />
+            <figcaption>El padrino</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#"
+            ><img src="/static/imagenes/matrix.jpg" alt="Matrix" />
+            <figcaption>Matrix</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#">
+            <img src="/static/imagenes/batman.jpeg" alt="batman" />
+            <figcaption>Batman</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#"
+            ><img src="/static/imagenes/bastardos.webp" alt="bastardos sin gloria" />
+            <figcaption>Volver al Futuro</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#">
+            <img src="/static/imagenes/forest.jpg" alt="forrest gump" />
+            <figcaption>Forrest Gump</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#">
+            <img src="/static/imagenes/gladiador.jpg" alt="Gladiador" />
+            <figcaption>Gladiador</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#"
+            ><img src="/static/imagenes/naufrago.webp" alt="Naufrago" />
+            <figcaption>Naufrago</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#"
+            ><img src="/static/imagenes/kingkong.jpg" alt="king kong" />
+            <figcaption>King Kong</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure>
+        <figure class="cartelera-figure">
+          <a href="#"
+            ><img src="/static/imagenes/toystory.webp" alt="toy story" />
+            <figcaption>Toy Story</figcaption>
+            <p>Accion | 180min</p></a
+          >
+        </figure> -->
+      </div>
+    </main>
+
+    <footer id="idFooter"></footer>
+    <script src="/static/JS/cartelera.js"></script>
+    <script src="/static/JS/footer.js"></script>
+    <script src="/static/JS/header.js"></script>
+    <script src="/static/JS/main.js"></script>
+  </body>
+</html>

@@ -67,7 +67,7 @@ function mostrarInfo(){
     let info = document.getElementById("compraInfo");
     info.style.display = "grid";
     const img = document.getElementById("portadaImagen");
-    img.src = "./static/imagenes/" + imagen_url;
+    img.src = "/static/imagenes/" + imagen_url;
     document.getElementById("tituloFilm").textContent = nombre;
     document.getElementById("infoGen").textContent = genero;
     document.getElementById("infoDur").textContent = duracion;

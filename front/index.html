@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Codo Cinema</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  </head>
+  <body>
+    <header id="idHeader"></header>
+    <main>
+      <section>
+        <div class="slide">
+          <div class="slide-inner">
+            <input class="slide-open" type="radio" id="slide-1" name="slide" aria-hidden="true" hidden="" checked="checked" />
+            <div class="slide-item">
+              <img src="/static/imagenes/starwarsbanner.jpg" alt="Star wars" />
+            </div>
+            <input class="slide-open" type="radio" id="slide-2" name="slide" aria-hidden="true" hidden="" />
+            <div class="slide-item">
+              <img src="/static/imagenes/godzilla.png" alt="John Wick" />
+            </div>
+            <input class="slide-open" type="radio" id="slide-3" name="slide" aria-hidden="true" hidden="" />
+            <div class="slide-item">
+              <img src="/static/imagenes/dunebanner.jpg" alt="Dune" />
+            </div>
+            <label for="slide-3" class="slide-control prev control-1">‹</label>
+            <label for="slide-2" class="slide-control next control-1">›</label>
+            <label for="slide-1" class="slide-control prev control-2">‹</label>
+            <label for="slide-3" class="slide-control next control-2">›</label>
+            <label for="slide-2" class="slide-control prev control-3">‹</label>
+            <label for="slide-1" class="slide-control next control-3">›</label>
+            <div class="slide-indicador">
+              <a class="btncomprar" href="compra.html">Reservar entrada</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--
+        
+      <section class="busqueda">
+        <form class="form-busqueda" action="#">
+          <label class="form-label" for="search">Busca una pelicula</label>
+          <input class="form-input" type="text" name="search" id="search" placeholder="Buscar película..." />
+          <input class="form-input btnbuscar" type="button" value="Buscar" />
+        </form>
+      </section>
+      
+    -->
+    <section class="cartelera-cine">
+      <h2 class="difuminado">Cartelera</h2>
+      <div class="cartelera" id="peliculas-container">
+        <figure class="cartelera-figure">
+          <a href=#>
+            <img src="/static/imagenes/starwars.jpg" alt="star wars" />
+            <figcaption>Star Wars Episodio III</figcaption>
+          </a>
+        </figure>
+      </div>
+    </section>
+    <h2 id="mensajeError"></h2>
+    <section class="prox-estrenos">
+      <h2 class="difuminado">Proximos estrenos</h2>
+      <div class="estrenos">
+          <figure class="estrenos-figure">
+            <a href="jurassicpark.html">
+              <img src="/static/imagenes/jurassicparkcard.jpg" alt="jurassicpark" />
+              <figcaption>Jurassicpark</figcaption>
+            </a>
+          </figure>
+          <figure class="estrenos-figure">
+            <a href="volveralfuturo.html">
+              <img src="/static/imagenes/volvercard.jpeg" alt="volver al futuro" />
+              <figcaption>Volver al Futuro</figcaption>
+              </a>
+          </figure>
+          <figure class="estrenos-figure">
+            <a href="#">
+              <img src="/static/imagenes/godzillacard.jpg" alt="godzilla" />
+              <figcaption>Godzilla</figcaption>
+            </a>
+          </figure>
+          <figure class="estrenos-figure">
+            <a href="#">
+              <img src="/static/imagenes/rapido.webp" alt="rapido y furioso" />
+              <figcaption>Rapido y Furioso</figcaption>
+            </a>
+          </figure>
+          <figure class="estrenos-figure">
+            <a href="#">
+              <img src="/static/imagenes/anilloscard.jpg" alt="el señor de los anillos" />
+              <figcaption>El señor de los anillos</figcaption>
+            </a>
+          </figure>
+          <figure class="estrenos-figure">
+            <a href="#">
+              <img src="/static/imagenes/fantasmas.jpeg" alt="caza fantasmas" />
+              <figcaption>Los cazafantasmas</figcaption>
+            </a>
+          </figure>
+        </div>
+      </section>
+      <section class="promos">
+        <h2 class="difuminado">Promociones</h2>
+        <div class="promociones">
+          <img src="/static/imagenes/promo1.jpg" alt="" />
+          <img src="/static/imagenes/promo2.jpg" alt="" />
+          <img src="/static/imagenes/promo3.jpg" alt="" />
+        </div>
+      </section>
+    </main>
+
+    <footer id="idFooter"></footer>
+    <script src="/static/JS/header.js"></script>
+    <script src="/static/JS/cartelera.js"></script>
+    <script src="/static/JS/footer.js"></script>
+    <script src="/static/JS/main.js"></script>
+  </body>
+</html>

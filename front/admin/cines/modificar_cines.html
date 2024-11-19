@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modificar Peliculas</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  </head>
+  <body>
+    <header><h1>Bienvenido Administrador!</h1></header>
+    <main> <section class="busqueda">
+      <h2 class="difuminado">Modificar cine</h2>
+      <h2 id="mensajeError"></h2>
+      <form class="form-busqueda" id="form-obtener-cine" action="#">
+        <label class="form-label" for="search">Cine a modificar</label>
+        <input class="form-input" type="text" name="search" id="codigo" placeholder="Buscar cine" />
+        <input class="form-input btnbuscar" type="submit" value="Buscar" />
+        <a class="form-input btnbuscar" href="admin_cines.html">Volver</a>
+      </form>
+    </section>
+    <section class="contacto">
+        <div class="contact_form" id="datos-cine" style="display: none;">
+          <form action="#" method="#" id="form-guardar-cambios" onsubmit="return validarFormulario()" class="formulario">
+
+            <label for="nombre_cine" class="formulario-label">Nombre del cine</label>
+            <input class="formulario-input" type="text" name="nombre_cine" id="nombre_cine" placeholder="Nombre cine"/>
+
+            <label for="direccion" class="formulario-label">Direccion </label>
+            <input class="formulario-input" type="text" name="direccion" id="direccion" placeholder="Direccion cine" />
+            
+            <label for="cant_salas" class="formulario-label">Cantidad de salas </label>
+            <input class="formulario-input" type="number" name="cant_salas" id="cant_salas" placeholder="Salas cine" />
+
+            <input class="formulario-input login" type="submit" value="Modificar"></input>
+            <a class="formulario-input volver" href="admin_cines.html">Volver</a>
+          </form>
+        </div>
+    </section>
+      </main>
+
+      <script type="module" src="/static/JS/admin/api.js"></script>
+      <script type="module" src="/static/JS/admin/cines/modificar_cine.js"></script>
+
+  </body>
+</html>

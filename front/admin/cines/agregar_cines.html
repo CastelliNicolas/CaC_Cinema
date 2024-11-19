@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agregar Pelicula</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  </head>
+  <body>
+    <main class="contacto">
+        <h2 class="difuminado">Agregar funcion</h2>
+        <h2 id="mensajeError"></h2>
+        <div class="contact_form">
+          <form enctype="multipart/form-data" id="formulario_cine" onsubmit="" class="formulario">
+            <label for="nombre_cine" class="formulario-label">Nombre del cine </label>
+            <input class="formulario-input" type="text" name="nombre_cine" id="nombre_cine" placeholder="Nombre del cine" />
+            
+            <label for="direccion" class="formulario-label">Direccion del cine </label>
+            <input class="formulario-input" type="text" name="direccion" id="direccion" placeholder="Direccion cine" />
+
+            <label for="cant_salas" class="formulario-label">Cantidad de salas </label>
+            <input class="formulario-input" type="number" name="cant_salas" id="cant_salas" placeholder="Nro de salas" />
+
+            <input class="formulario-input login" type="submit" value="Agregar"></input>
+            <a class="formulario-input volver" href="admin_cines.html">Volver</a>
+          </form>
+        </div>
+    </main>
+    <script type="module" src="/static/JS/admin/cines/agregar_cine.js"></script>
+    <script type="module" src="/static/JS/admin/api.js"></script>
+  </body>
+</html>

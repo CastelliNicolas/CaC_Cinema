@@ -1,4 +1,7 @@
 #--------------------------------------------------------------------
+#
+from init_db import crear_db
+
 # Instalar con pip install Flask
 from flask import request, jsonify, Blueprint
 
@@ -32,15 +35,15 @@ class Catalogo:
         except mysql.connector.Error as err:
             # Si la base de datos no existe, la creamos
             if err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
-                self.cursor.execute(f"CREATE DATABASE {database}")
+                crear_db()
                 self.conn.database = database
             else:
                 raise err
 
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS pelicula (
             codigo INT AUTO_INCREMENT PRIMARY KEY,
-            nombre VARCHAR(255) NOT NULL,
-            genero VARCHAR(255) NOT NULL,
+            nombre_pelicula VARCHAR(255) NOT NULL,
+            genero_pelicula VARCHAR(255) NOT NULL,
             director VARCHAR(255) NOT NULL,
             duracion int NOT NULL,
             imagen_url VARCHAR(255),
@@ -66,7 +69,7 @@ class Catalogo:
 
     def agregar_pelicula(self, nombre, genero, director, duracion, imagen, trailer, clasificacion, sinopsis):
         # Agregamos una nueva pelicula a la base de datos
-        sql = "INSERT INTO pelicula (nombre, genero, director, duracion, imagen_url, trailer_url, clasificacion, sinopsis) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO pelicula (nombre_pelicula, genero_pelicula, director, duracion, imagen_url, trailer_url, clasificacion, sinopsis) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         valores = (nombre, genero, director, duracion, imagen, trailer, clasificacion, sinopsis)
         self.cursor.execute(sql,valores)
         self.conn.commit()
@@ -74,7 +77,7 @@ class Catalogo:
 
     def modificar_pelicula(self, codigo, nuevo_nombre, nuevo_genero, nuevo_director, nueva_duracion, nueva_imagen, nuevo_trailer, nueva_clasificacion, nueva_sinopsis):
         # Modificamos una pelicula existente en la base de datos
-        sql = "UPDATE pelicula SET nombre = %s, genero = %s, director = %s, duracion = %s, imagen_url = %s, trailer_url = %s, clasificacion = %s, sinopsis = %s WHERE codigo = %s"
+        sql = "UPDATE pelicula SET nombre_pelicula = %s, genero_pelicula = %s, director = %s, duracion = %s, imagen_url = %s, trailer_url = %s, clasificacion = %s, sinopsis = %s WHERE codigo = %s"
         valores = (nuevo_nombre, nuevo_genero, nuevo_director, nueva_duracion, nueva_imagen, nuevo_trailer, nueva_clasificacion, nueva_sinopsis, codigo)
         self.cursor.execute(sql, valores)
         self.conn.commit()
@@ -90,7 +93,7 @@ class Catalogo:
 # Cuerpo del programa
 #--------------------------------------------------------------------
 # Crear una instancia de la clase Catalogo
-catalogo = Catalogo(host="localhost", user="root", password="", database="pelicula")
+catalogo = Catalogo(host="localhost", user="root", password="", database="cac_cinema")
 # catalogo = Catalogo(host='Sinost.mysql.pythonanywhere-services.com', user='Sinost', password='cinemaCodo', database='Sinost$cinema')
 
 # Carpeta para guardar las imagenes
@@ -196,4 +199,4 @@ def eliminar_pelicula(codigo):
         return jsonify({"mensaje": "pelicula no encontrada"}), 404
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    peliculas_bp.run(debug=True)

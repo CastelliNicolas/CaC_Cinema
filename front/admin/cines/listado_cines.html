@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <title>Lista Peliculas</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Bienvenido Administrador!</h1>
+  </header>
+  <main class="contacto">
+    <h2 class="difuminado">Listado cines</h2>
+    <div>
+      <!-- <h1>Listado de peliculas del Inventario</h1><br> -->
+      <h2 id="mensajeError"></h2>
+      <table class="tabla"> <!-- Se crea una tabla para mostrar los peliculas. -->
+        <thead> <!--Encabezado de la tabla con columnas para código, descripción, cantidad, precio y acciones.-->
+          <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Direccion</th>
+            <th>Cantidad de salas</th>
+          </tr>
+        </thead>
+        <tbody id="tablaCines"> </tbody>
+      </table><br>
+
+      <div class="formulario">
+        <a class="formulario-input volver" href="admin_cines.html">Volver</a>
+      </div>
+  </main>
+  <script type ="module" src="/static/JS/admin/cines/listado_cine.js"></script>
+  <script type="module" src="/static/JS/admin/api.js"></script>
+</body>
+
+</html>

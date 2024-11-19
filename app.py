@@ -1,6 +1,8 @@
 from flask import Flask
 from users import usuarios_bp
 from peliculas import peliculas_bp
+from cines import cines_bp
+from funciones_peliculas import funciones_bp
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -10,6 +12,8 @@ CORS(app, supports_credentials=True)
 # Registrar los Blueprints
 app.register_blueprint(usuarios_bp, url_prefix='/')
 app.register_blueprint(peliculas_bp, url_prefix='/')
+app.register_blueprint(cines_bp, url_prefix="/")
+app.register_blueprint(funciones_bp, url_prefix="/")
 
 if __name__ == '__main__':
     app.run()

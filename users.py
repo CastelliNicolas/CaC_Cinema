@@ -1,6 +1,8 @@
 #--------------------------------------------------------------------
 from flask import request, jsonify, Blueprint, session
 
+from init_db import crear_db
+
 import mysql.connector
 
 from werkzeug.utils import secure_filename
@@ -24,7 +26,7 @@ class Usuario:
         except mysql.connector.Error as err:
             # Si la base de datos no existe, la creamos
             if err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
-                self.cursor.execute(f"CREATE DATABASE {database}")
+                crear_db()
                 self.conn.database = database
             else:
                 raise err
@@ -81,7 +83,7 @@ class Usuario:
 #----------------------------------------------------------------------------
 # Usuarios test
 #----------------------------------------------------------------------------
-usuario = Usuario(host="localhost", user="root", password="", database="usuario")
+usuario = Usuario(host="localhost", user="root", password="", database="cac_cinema")
 @usuarios_bp.route("/usuario", methods=["GET"])
 def listar_usuarios():
     usuarios = usuario.listar_usuarios()

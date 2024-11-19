@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comprar - Codo Cinema</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  </head>
+  <body>
+    <header id="idHeader"></header>
+    <main>
+      <h2 class="difuminado">Compra de Entrada</h2>
+      <div class="compra">
+        <div class="datos">
+          <div class="select">
+            <select name="select-cine" id="selection-cine">
+              <option value="" class="hidden">Selecciona el cine</option>
+              <option value="place 1">CABA</option>
+              <option value="place 2">Ituzaingo</option>
+              <option value="place 3">Quilmes</option>
+            </select>
+          </div>
+          <div class="select">
+            <select name="select-movie" id="selection-movie" onchange="obtenerInfo()">
+              <option value="" class="hidden">Selecciona una pelicula</option>
+            </select>
+          </div>
+          <div class="select">
+            <select name="select-horario" id="selection-horario">
+              <option value="" class="hidden">Selecciona un horario</option>
+              <option value="hour 1">Lunes - 15Hs</option>
+              <option value="hour 2">Miercoles - 16Hs</option>
+              <option value="hour 3">Sabado - 20Hs</option>
+            </select>
+          </div>
+          <div class="select">
+            <a class="btncomprar disable" id="btn-comprar">Comprar</a>
+          </div>
+        </div>
+        <div class="info" id="compraInfo">
+          <div class="caratula">
+            <img alt="portada" id="portadaImagen" />
+          </div>
+          <div class="detalles">
+            <h2 id="tituloFilm"></h2>
+            <ul>
+              <li>
+                <span class="bolder">Genero:</span>
+                <span id="infoGen"></span>
+              </li>
+              <li>
+                <span class="bolder">Duracion:</span>
+                <span id="infoDur"></span>
+              </li>
+              <li>
+                <span class="bolder">Director:</span>
+                <span id="infoDir"></span>
+              </li>
+              <li>
+                <span class="bolder">Clasificacion:</span>
+                <span id="infoCla"></span>
+              </li>
+            </ul>
+            <p id="sinopFilm"></p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer id="idFooter"></footer>
+    <script src="/static/JS/footer.js"></script>
+    <script src="/static/JS/header.js"></script>
+    <script src="/static/JS/compra.js"></script>
+  </body>
+</html>
