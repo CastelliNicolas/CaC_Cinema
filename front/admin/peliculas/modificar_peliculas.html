@@ -21,11 +21,11 @@
         <label class="form-label" for="search">Pelicula a modificar</label>
         <input class="form-input" type="text" name="search" id="codigo" placeholder="Buscar película..." />
         <input class="form-input btnbuscar" type="submit" value="Buscar" />
-        <a class="form-input btnbuscar" href="admin.html">Volver</a>
+        <a class="form-input btnbuscar" href="admin_peliculas.html">Volver</a>
       </form>
     </section>
     <section class="contacto">
-        <div class="contact_form" id="datos-producto" style="display: none;">
+        <div class="contact_form" id="datos-pelicula" style="display: none;">
           <form action="#" method="#" id="form-guardar-cambios" onsubmit="return validarFormulario()" class="formulario">
             <label for="nombre" class="formulario-label">Nombre </label>
             <input class="formulario-input" type="text" name="nombre" id="nombre" placeholder="Nombre pelicula" />
@@ -62,14 +62,14 @@
             <textarea id="sinopsis" name="sinopsis" rows="5" cols="10"></textarea><br>
 
             <input class="formulario-input login" type="submit" value="Modificar"></input>
-            <a class="formulario-input volver" href="admin.html">Volver</a>
+            <a class="formulario-input volver" href="admin_peliculas.html">Volver</a>
           </form>
         </div>
     </section>
       </main>
 
-      <script src="/static/JS/admin/peliculas/modificar_pelicula.js"></script>
-
+      <script type="module" src="/static/JS/admin/peliculas/modificar_pelicula.js"></script>
+      <script type="module" src="/static/JS/admin/apiFeedbackHandler.js"></script>
 
   </body>
 </html>

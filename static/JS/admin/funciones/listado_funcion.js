@@ -1,4 +1,4 @@
-import { recibirData } from "../api.js";
+import { recibirData } from "../apiFeedbackHandler.js";
 
 recibirData("funcion", "GET")
   //Esta función maneja los datos convertidos del JSON.

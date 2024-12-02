@@ -1,4 +1,4 @@
-import {recibirData, enviarData} from "../api.js";
+import {recibirData, enviarData} from "../apiFeedbackHandler.js";
 import {fillSelect} from "../utils.js";
 // Funcion para formatear fecha
 function convertirFecha(fecha) {

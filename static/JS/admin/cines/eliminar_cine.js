@@ -1,4 +1,4 @@
-import { recibirData, borrarData } from "../api.js";
+import { recibirData, borrarData } from "../apiFeedbackHandler.js";
 
 let msgEx = "Cines obtenidos correctamente.";
 let msgErr = "Error al obtener cines.";

@@ -1,4 +1,4 @@
-import { recibirData, borrarData} from "../api.js";
+import { recibirData, borrarData} from "../apiFeedbackHandler.js";
 
 // Cuando la página se carga, llama a obtenerFunciones para cargar la lista de funciones.
 document.addEventListener("DOMContentLoaded", obtenerFunciones);

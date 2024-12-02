@@ -1,4 +1,4 @@
-import { enviarData } from "../api.js";
+import { enviarData } from "../apiFeedbackHandler.js";
 
 document.getElementById("formulario_cine").addEventListener("submit", function (event) {
     event.preventDefault(); // Evitamos que se envie el form

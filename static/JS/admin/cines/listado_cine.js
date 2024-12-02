@@ -1,4 +1,4 @@
-import { recibirData } from "../api.js";
+import { recibirData } from "../apiFeedbackHandler.js";
 let msgExito = "Mostrando cines"
 let msgError = "Error al mostrar los cines"
 // Realizamos la solicitud GET al servidor para obtener todos los peliculas.

@@ -1,9 +1,4 @@
-const URL = "http://127.0.0.1:5000/"
-//const URL = "https://sinost.pythonanywhere.com/";
-
-// Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
-//const URL = "https://USUARIO.pythonanywhere.com/"
-
+import { recibirData, enviarData } from "../apiFeedbackHandler.js";
 // Variables de estado para controlar la visibilidad y los datos del formulario
 let codigo = "";
 let nombre = "";
@@ -26,17 +21,10 @@ document.getElementById("nuevaImagen").addEventListener("change", seleccionarIma
 function obtenerPelicula(event) {
   event.preventDefault();
   codigo = document.getElementById("codigo").value;
-  fetch(URL + "pelicula/" + codigo)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Error al obtener los datos de la pelicula.");
-      }
-    })
+  recibirData("pelicula/" + codigo, "GET", "Error al obtener la pelicula: " + codigo, "Pelicula obtenida correctamente")
     .then((data) => {
-      nombre = data.nombre;
-      genero = data.genero;
+      nombre = data.nombre_pelicula;
+      genero = data.genero_pelicula;
       director = data.director;
       duracion = data.duracion;
       clasificacion = data.clasificacion;
@@ -45,15 +33,6 @@ function obtenerPelicula(event) {
       imagen_url = data.imagen_url;
       mostrarDatosProducto = true; //Activa la vista del segundo formulario
       mostrarFormulario();
-    })
-    .catch((error) => {
-      let mensajeErrorElemento = document.getElementById("mensajeError");
-
-      if (mensajeErrorElemento) {
-        mensajeErrorElemento.textContent = "No se encontro la pelicula";
-        mensajeErrorElemento.style.color = "red"; // Opcional: estilo para el mensaje de error
-        mensajeErrorElemento.style.textAlign = "center"; // Opcional: estilo para el mensaje de error
-      }
     });
 }
 
@@ -81,9 +60,9 @@ function mostrarFormulario() {
       imagenActual.style.display = "none"; // Oculta la imagen si no hay URL
     }
 
-    document.getElementById("datos-producto").style.display = "block";
+    document.getElementById("datos-pelicula").style.display = "block";
   } else {
-    document.getElementById("datos-producto").style.display = "none";
+    document.getElementById("datos-pelicula").style.display = "none";
   }
 }
 
@@ -117,40 +96,9 @@ function guardarCambios(event) {
     formData.append("imagen", imagenSeleccionada, imagenSeleccionada.name);
   }
 
-  fetch(URL + "pelicula/" + codigo, {
-    method: "PUT",
-    body: formData,
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Error al guardar los cambios de la pelicula.");
-      }
-    })
+  enviarData("pelicula/" + codigo, "PUT", formData, "Error al modificar pelicula", "Pelicula modificada correctamente")
     .then((data) => {
-      let mensajeErrorElemento = document.getElementById("mensajeError");
-      if (mensajeErrorElemento) {
-        mensajeErrorElemento.textContent = "Pelicula modificada";
-        mensajeErrorElemento.style.color = "red"; // Opcional: estilo para el mensaje de error
-        mensajeErrorElemento.style.textAlign = "center"; // Opcional: estilo para el mensaje de error
-      }
       limpiarFormulario();
-    })
-    .catch(function (error) {
-      // Código para manejar errores
-      console.error("Error al obtener las películas:", error);
-
-      // Obtener el elemento por su ID y mostrar el mensaje de error
-      let mensajeErrorElemento = document.getElementById("mensajeError");
-
-      if (mensajeErrorElemento) {
-        mensajeErrorElemento.textContent = "No se pudo modificar la pelicula";
-        mensajeErrorElemento.style.color = "red"; // Opcional: estilo para el mensaje de error
-        mensajeErrorElemento.style.textAlign = "center"; // Opcional: estilo para el mensaje de error
-      } else {
-        console.error("Elemento con id 'mensajeError' no encontrado en el DOM.");
-      }
     });
 }
 
@@ -177,7 +125,7 @@ function limpiarFormulario() {
   genero = "";
   director = "";
   duracion = "";
-  trailer = "";
+  trailer_url = "";
   clasificacion = "";
   sinopsis = "";
   imagen_url = "";
@@ -185,5 +133,5 @@ function limpiarFormulario() {
   imagenUrlTemp = null;
   mostrarDatosProducto = false;
 
-  document.getElementById("datos-producto").style.display = "none";
+  document.getElementById("datos-pelicula").style.display = "none";
 }
