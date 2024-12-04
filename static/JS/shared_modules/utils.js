@@ -1,4 +1,4 @@
-import { recibirData } from "./api.js";
+import { recibirData } from "/static/JS/shared_modules/apiFeedbackHandler.js";
 //Popular select
 export function fillSelect(endpoint, elementId, key){
     recibirData(endpoint, "GET", "Error al llenar Select - " + endpoint, "Exito al llenar Select - " + endpoint)

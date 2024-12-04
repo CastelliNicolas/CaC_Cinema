@@ -1,7 +1,5 @@
-import { recibirData, borrarData} from "../apiFeedbackHandler.js";
+import { recibirData, borrarData} from "/static/JS/shared_modules/apiFeedbackHandler.js";
 
-// Cuando la página se carga, llama a obtenerFunciones para cargar la lista de funciones.
-document.addEventListener("DOMContentLoaded", obtenerFunciones);
 
 // Obtiene el contenido del inventario
 function obtenerFunciones() {
@@ -12,12 +10,12 @@ function obtenerFunciones() {
       data.forEach((funciones) => {
         const row = funcionesTable.insertRow();
         row.innerHTML = `
-                     <td class="elementos">${funciones.codigo}</td>
-                     <td class="elementos">${funciones.funcion_pelicula}</td>
-                     <td class="elementos">${funciones.fecha}</td>
-                     <td class="elementos">${funciones.horario}</td>
-                     <td class="elementos formulario"><button class="formulario-input volver" onclick="eliminarFuncion('${funciones.codigo}')">Eliminar</button></td>
-                 `;
+        <td class="elementos">${funciones.codigo}</td>
+        <td class="elementos">${funciones.funcion_pelicula}</td>
+        <td class="elementos">${funciones.fecha}</td>
+        <td class="elementos">${funciones.horario}</td>
+        <td class="elementos formulario"><button class="formulario-input volver" onclick="eliminarFuncion('${funciones.codigo}')">Eliminar</button></td>
+        `;
       });
     });
 };
@@ -29,3 +27,5 @@ window.eliminarFuncion = function(codigo) {
     obtenerFunciones()
   });
 };
+// Cuando la página se carga, llama a obtenerFunciones para cargar la lista de funciones.
+document.addEventListener("DOMContentLoaded", obtenerFunciones);

@@ -1,9 +1,8 @@
-import { recibirData, borrarData } from "../apiFeedbackHandler.js";
+import { recibirData, borrarData } from "/static/JS/shared_modules/apiFeedbackHandler.js";
 
 let msgEx = "Cines obtenidos correctamente.";
 let msgErr = "Error al obtener cines.";
 
-document.addEventListener("DOMContentLoaded", cargarCines);
 
 function cargarCines(){
     recibirData("cine", "GET", msgErr, msgEx)
@@ -11,14 +10,14 @@ function cargarCines(){
         const cinesTable = document.getElementById("cines-table").getElementsByTagName("tbody")[0];
         cinesTable.innerHTML = ""; // Limpia la tabla antes de insertar nuevos datos
         data.forEach((cines) => {
-          const row = cinesTable.insertRow();
-          row.innerHTML = `
-                       <td class="elementos">${cines.codigo}</td>
-                       <td class="elementos">${cines.nombre_cine}</td>
-                       <td class="elementos">${cines.direccion}</td>
-                       <td class="elementos">${cines.cant_salas}</td>
-                       <td class="elementos formulario"><button class="formulario-input volver" onclick="eliminarCine('${cines.codigo}')">Eliminar</button></td>
-                   `;
+            const row = cinesTable.insertRow();
+            row.innerHTML = `
+            <td class="elementos">${cines.codigo}</td>
+            <td class="elementos">${cines.nombre_cine}</td>
+            <td class="elementos">${cines.direccion}</td>
+            <td class="elementos">${cines.cant_salas}</td>
+            <td class="elementos formulario"><button class="formulario-input volver" onclick="eliminarCine('${cines.codigo}')">Eliminar</button></td>
+            `;
         });
     })
     .catch(error => {
@@ -36,3 +35,4 @@ window.eliminarCine = function(codigo){
         console.error("Error al eliminar cine:", error);
     })
 }
+document.addEventListener("DOMContentLoaded", cargarCines);

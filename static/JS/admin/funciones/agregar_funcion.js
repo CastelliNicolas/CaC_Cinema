@@ -1,5 +1,5 @@
-import { recibirData, enviarData} from "../apiFeedbackHandler.js"
-import{fillSelect} from "../utils.js"
+import { recibirData, enviarData} from "/static/JS/shared_modules/apiFeedbackHandler.js"
+import{fillSelect} from "/static/JS/shared_modules/utils.js"
 //Cargar Selects de Cine y Peliculas
 document.addEventListener("DOMContentLoaded", cargarOpciones);
 

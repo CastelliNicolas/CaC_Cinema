@@ -1,4 +1,4 @@
-import { enviarData } from "../apiFeedbackHandler.js";
+import { enviarData } from "/static/JS/shared_modules/apiFeedbackHandler.js";
 
 // Capturamos el evento de envío del formulario
 document.getElementById("formulario").addEventListener("submit", function (event) {

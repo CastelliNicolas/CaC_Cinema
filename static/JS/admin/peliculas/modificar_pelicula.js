@@ -1,4 +1,4 @@
-import { recibirData, enviarData } from "../apiFeedbackHandler.js";
+import { recibirData, enviarData } from "/static/JS/shared_modules/apiFeedbackHandler.js";
 // Variables de estado para controlar la visibilidad y los datos del formulario
 let codigo = "";
 let nombre = "";
