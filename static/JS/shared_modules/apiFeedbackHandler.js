@@ -4,9 +4,12 @@ const URL = "http://127.0.0.1:5000/"
 //const URL = "https://USUARIO.pythonanywhere.com/"
 
 // Manejo de metodo GET
-export function recibirData(endpoint, method= "GET", msgError, msgExito){
-    let metodo = {method}
-    return fetch(URL + endpoint, metodo)
+export function recibirData(endpoint, method= "GET", msgError, msgExito, needCredentials=false){
+    const options = {method: method};
+    if(needCredentials){
+        options.credentials = "include";
+    }
+    return fetch(URL + endpoint, options)
     .then((response) =>{
         if (!response.ok) {
             throw new Error("Error en la solicitud: " + response.statusText);
@@ -23,24 +26,34 @@ export function recibirData(endpoint, method= "GET", msgError, msgExito){
     })
 }
 // Manejo de metodo POST y PUT
-export function enviarData(endpoint, method, formData, msgError, msgExito){
-    return fetch(URL + endpoint, {
+export function enviarData(endpoint, method, body, msgError, msgExito, needCredentials=false, isBodyJSON=false){
+    const defaultOptions = {
         method: method,
-        body: formData
-    } )
+        body: body
+    }
+    
+    if(needCredentials){
+        defaultOptions.credentials = "include";
+    }
+
+    if(isBodyJSON){
+        defaultOptions.headers = { 'Content-Type': 'application/json' }
+    }
+    
+    return fetch(URL + endpoint, defaultOptions)
     .then((response) => {
         if(response.ok){
             return response.json();
         } else {
-            throw new Error("Error al cargar");
+            return response.json().then(errorData => {
+                mostrarMensaje(msgError, "red");
+                throw new Error(errorData.error || "Error al cargar");
+            });
         }
     })
     .then((data) => {
         mostrarMensaje(msgExito, "green");
-    })
-    .catch((error) => {
-        console.error("Error:", error);
-        mostrarMensaje(msgError, "red");
+        return data
     })
 }
 
@@ -78,6 +91,7 @@ function mostrarMensaje(mensaje, color) {
       setTimeout(ocultarMensaje, 3000)
     } else{
         console.error("Elemento con id 'mensajeError' no encontrado en el DOM.")
+        console.log(mensaje)
     }
   }
 

@@ -12,7 +12,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     window.location.href = "admin.html";
   } else {
     // Mostrar el mensaje de error si los datos son incorrectos
-    var errorMessage = document.getElementById("error-message");
-    errorMessage.style.display = "block";
+    //var errorMessage = document.getElementById("error-message");
+    //errorMessage.style.display = "block";
   }
 });

@@ -1,5 +1,5 @@
-const URL = "http://127.0.0.1:5000/";
-
+import { enviarData } from "../shared_modules/apiFeedbackHandler.js";
+const URL = "http://127.0.0.1:5000/"
 let errorAlertPass = document.getElementById("formulario-error-pass");
 let errorAlertEmail = document.getElementById("formulario-error-email");
 
@@ -9,31 +9,9 @@ document.getElementById("loginForm").addEventListener("submit", function(event){
         errorAlertEmail.classList.add("formulario-error")
         errorAlertPass.classList.add("formulario-error")
     }
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    var formData = new FormData(this);
 
-    fetch(URL + "login",
-        {method : "POST",
-        credentials: "include",
-        headers: {
-        "Content-Type": "application/json"
-        },
-        body: JSON.stringify({email: email, password: password})
-    })
-    .then(function(response){
-        if (response.ok){
-            return response.json();
-        } else{
-            return response.json().then(error => {
-                if(error.error == "Correo incorrecto")
-                    errorAlertEmail.classList.remove("formulario-error");
-                if(error.error == "Contraseña incorrecta"){
-                    errorAlertPass.classList.remove("formulario-error")
-                }
-                throw new Error(error.error); // Para manejar el error si es necesario
-            });
-        }
-    })
+    enviarData("login", "POST", formData, "Error al iniciar Sesion", "Sesion iniciada", true)
     .then(function (data) {
         // Aquí puedes manejar los datos JSON recibidos del servidor
         console.log("Success:", data);
@@ -48,8 +26,15 @@ document.getElementById("loginForm").addEventListener("submit", function(event){
             window.location.href = "index.html";
         }
     })
-    .catch(function (error) {
+    .catch(error => {
+        if (error.message === "Correo incorrecto") {
+            errorAlertEmail.classList.remove("formulario-error");
+        }
+        if (error.message === "Contraseña incorrecta") {
+            errorAlertPass.classList.remove("formulario-error");
+        }
         // Código para manejar errores
-        console.error("Error al iniciar sesion.", error);
+        console.error("Error inesperado:", error);
+        
     });
 });

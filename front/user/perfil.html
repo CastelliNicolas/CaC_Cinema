@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/static/css/styles.css" />
     <link rel="stylesheet" href="/static/css/perfil.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet" />
@@ -17,41 +17,52 @@
     <header id="idHeader"></header>
     <main>
         <div class="container-box">
-            <div class="perfil-container">
+            <form class="perfil-container" id="perfilForm">
                 <div class="perfil-con-box">
-                    <img class="profile-icon" src="//static/imagenes/user_icon.svg" alt="img-perfil">
+                    <img class="profile-icon" src="/static/imagenes/user_icon.svg" alt="img-perfil">
                 </div>
+                
                 <div class="perfil-con-box">
                     <label for="nombre-perfil">Nombre</label>
                     <div class="perfil-input">
                         <input type="text" name="name" id="nombre-perfil" disabled>
-                        <button id="btn-perfil-edit-nm"><img src="//static/imagenes/iconmonstr-pencil-14.svg" alt="editar"></button>
+                        <button type="button" id="btn-perfil-edit-nm">
+                            <img src="/static/imagenes/iconmonstr-pencil-14.svg" alt="editar">
+                        </button>
                     </div>
                 </div>
+                
                 <div class="perfil-con-box">
                     <label for="correo-perfil">Correo</label>
                     <div class="perfil-input">
-                        <input type="text" name="correo" id="correo-perfil" disabled>
-                        <button id="btn-perfil-edit-em"><img src="//static/imagenes/iconmonstr-pencil-14.svg" alt="editar"></button>
+                        <input type="email" name="correo" id="correo-perfil" disabled>
+                        <button type="button" id="btn-perfil-edit-em">
+                            <img src="/static/imagenes/iconmonstr-pencil-14.svg" alt="editar">
+                        </button>
                     </div>
                 </div>
+                
                 <div class="perfil-con-box">
                     <label for="cel-perfil">Celular</label>
                     <div class="perfil-input">
-                        <input type="text" name="correo" id="cel-perfil" disabled autocomplete="off">
-                        <button id="btn-perfil-edit-tl"><img src="//static/imagenes/iconmonstr-pencil-14.svg" alt="editar"></button>
+                        <input type="text" name="celular" id="cel-perfil" disabled autocomplete="off">
+                        <button type="button" id="btn-perfil-edit-tl">
+                            <img src="/static/imagenes/iconmonstr-pencil-14.svg" alt="editar">
+                        </button>
                     </div>
                 </div>
+
                 <div class="perfil-con-box">
-                    <button class="btncomprar disable" id="btn-perfil-save" disabled>Guardar cambios</button>
+                    <button class="btncomprar disable" id="btn-perfil-save" type="submit" disabled>Guardar cambios</button>
                 </div>
-            </div>
+            </form>
         </div>
     </main>
     <footer id="idFooter"></footer>
     <script src="/static/JS/ui_components/footer.js"></script>
     <script src="/static/JS/ui_components/header.js"></script>
     <script src="/static/JS/ui_components/navCollapseControl.js"></script>
-    <script src="/static/JS/user/perfil.js"></script>
+    <script type="module" src="/static/JS/user/perfil.js"></script>
+    <script type="module" src="/static/JS/shared_modules/apiFeedbackHandler.js"></script>
 </body>
 </html>

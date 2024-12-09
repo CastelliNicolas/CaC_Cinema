@@ -47,7 +47,7 @@ function guardarCambios(event){
     formData.append("direccion", document.getElementById("direccion").value);
     formData.append("cant_salas", document.getElementById("cant_salas").value);
     enviarData("cine/" + codigo, "PUT", formData, msgError, msgExito)
-    .then((data) => {
+    .then(() => {
         limpiarFormulario()
     })
     .catch(error => {

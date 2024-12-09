@@ -33,7 +33,10 @@ function obtenerPelicula(event) {
       imagen_url = data.imagen_url;
       mostrarDatosProducto = true; //Activa la vista del segundo formulario
       mostrarFormulario();
-    });
+    })
+    .catch(() => {
+      console.error("TEST ERROR: PELICULA NO ENCONTRADA")
+    })
 }
 
 // Muestra el formulario con los datos de la pelicula
@@ -97,7 +100,7 @@ function guardarCambios(event) {
   }
 
   enviarData("pelicula/" + codigo, "PUT", formData, "Error al modificar pelicula", "Pelicula modificada correctamente")
-    .then((data) => {
+    .then(() => {
       limpiarFormulario();
     });
 }

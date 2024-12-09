@@ -8,7 +8,7 @@ document.getElementById("formulario").addEventListener("submit", function (event
 
   enviarData("pelicula", "POST", formData, "Error al agregar pelicula", "Pelicula agregada correctamente")
     //Respuesta OK, muestra una alerta informando que la pelicula se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
-    .then(function (data) {
+    .then(function () {
       console.log("Agregado.");
     })
     // Limpiar el formulario en ambos casos (éxito o error)

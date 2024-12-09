@@ -33,7 +33,7 @@ class Usuario:
 
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS usuario (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            nombre VARCHAR(255) NOT NULL,
+            nombre_usuario VARCHAR(255) NOT NULL,
             apellido VARCHAR(255) NOT NULL,
             email VARCHAR(255) NOT NULL UNIQUE,
             contraseña VARCHAR(255) NOT NULL,
@@ -58,21 +58,28 @@ class Usuario:
         self.cursor.execute(f"SELECT * FROM usuario WHERE email = %s", (email,))
         return self.cursor.fetchone()
     
-    def agregar_usuario(self, nombre, apellido, email, contraseña, celular, genero, fecha_nacimiento):
-        sql = "INSERT INTO usuario (nombre, apellido, email, contraseña, celular, genero, fecha_nacimiento) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        valores = (nombre, apellido, email, contraseña, celular, genero, fecha_nacimiento)
+    def agregar_usuario(self, nombre_usuario, apellido, email, contraseña, celular, genero, fecha_nacimiento):
+        sql = "INSERT INTO usuario (nombre_usuario, apellido, email, contraseña, celular, genero, fecha_nacimiento) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        valores = (nombre_usuario, apellido, email, contraseña, celular, genero, fecha_nacimiento)
         self.cursor.execute(sql, valores)
         self.conn.commit()
         return self.cursor.lastrowid
 
-    def modificar_usuario(self, id, cambios):
+    def modificar_usuario2(self, id, cambios):
         set_clause = ", ".join([f"{col} = %s" for col in cambios.keys()])
         sql = f"UPDATE usuario SET {set_clause} WHERE id = %s"
         valores = list(cambios.values()) + [id]
         self.cursor.execute(sql, valores)
         self.conn.commit()
         return self.cursor.rowcount > 0
-
+    
+    def modificar_usuario(self, codigo, nuevo_nombre_usuario, nuevo_email, nuevo_celular):
+        slq = "UPDATE usuario SET nombre_usuario=%s, email=%s, celular=%s WHERE id=%s ;"
+        valores = (nuevo_nombre_usuario, nuevo_email, nuevo_celular, codigo)
+        self.cursor.execute(slq, valores)
+        self.conn.commit()
+        return self.cursor.rowcount > 0
+    
     def eliminar_usuario(self, id):
         self.cursor.execute(f"DELETE FROM usuario WHERE id = {id}")
         self.conn.commit()
@@ -115,10 +122,11 @@ def agregar_usuario():
 
 @usuarios_bp.route("/usuario/<int:id>", methods=["PUT"])
 def modificar_usuario(id):
-    print(request.get_json())
-    data = request.get_json()
     
-    cambios = {}
+    """"
+    data = request.get_json()
+    print(request.get_json())
+
     if "nombre" in data:
         cambios["nombre"] = data["nombre"]
     if "email" in data:
@@ -127,7 +135,18 @@ def modificar_usuario(id):
         cambios["celular"] = data["celular"]
     
 
-    if usuario.modificar_usuario(id, cambios):
+    """
+    nuevo_nombre = request.form.get("nombre_usuario")
+    nuevo_email = request.form.get("email")
+    nuevo_celular = request.form.get("celular")
+
+    print(nuevo_nombre, nuevo_celular, nuevo_email)
+
+
+    cambios = {nuevo_nombre, nuevo_email, nuevo_celular}
+
+
+    if usuario.modificar_usuario(id, nuevo_nombre, nuevo_email, nuevo_celular):
         return jsonify({"mensaje": "Usuario modificado"}), 200
     else:
         return jsonify({"error": "Error al modificar usuario"}), 400
@@ -142,10 +161,14 @@ def eliminar_usuario(id):
 @usuarios_bp.route("/login", methods=["POST"])
 def login_usuario():
     
+    email = request.form["email"]
+    password = request.form["password"]
+    """""
     data = request.get_json()  
     email = data.get("email")
     password = data.get("password")
-
+    """
+    
     print(f"Email recibido: {email}")
     print(f"Password recibido: {password}")
     if not email or not password:
@@ -160,7 +183,7 @@ def login_usuario():
     session["user_id"] = user["id"]
     print(session)
          # Guardar el id del usuario en la sesión
-    return jsonify({"id": user["id"], "nombre": user["nombre"]}), 200
+    return jsonify({"id": user["id"], "nombre": user["nombre_usuario"]}), 200
 
 @usuarios_bp.route("/perfil", methods=["GET"])
 def perfil_usuario():

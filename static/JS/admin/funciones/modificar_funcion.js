@@ -105,7 +105,7 @@ function guardarCambios(event) {
   formData.append("sala", document.getElementById("sala").value);
 
   enviarData("funcion/" + codigo, "PUT", formData, "Error al modificar funcion", "Funcion modificada")
-    .then((data) => {
+    .then(() => {
       limpiarFormulario();
     })
     .catch((error) => {
