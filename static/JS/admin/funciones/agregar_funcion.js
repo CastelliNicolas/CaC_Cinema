@@ -1,22 +1,37 @@
+import { fillSelectArray } from "../../shared_modules/utils.js";
 import { recibirData, enviarData} from "/static/JS/shared_modules/apiFeedbackHandler.js"
 import{fillSelect} from "/static/JS/shared_modules/utils.js"
 //Cargar Selects de Cine y Peliculas
-document.addEventListener("DOMContentLoaded", cargarOpciones);
+
+let cinesDisponibles = []
+
+function obtenerCines(){
+  recibirData("cine", "GET", "Err", "EXX")
+  .then((data)=>{
+    for(let cine of data){
+      cinesDisponibles.push(cine);
+    }
+    cargarOpciones()
+  })
+}
+
+document.addEventListener("DOMContentLoaded", obtenerCines);
 
 function cargarOpciones(){
-  fillSelect("cine", "codigo_cine", "nombre_cine")
   fillSelect("pelicula", "codigo_pelicula", "nombre_pelicula")
+  fillSelectArray(cinesDisponibles, "codigo_cine", "nombre_cine")
 };
 //Cargar select dinamico de Salas
 document.getElementById("codigo_cine").addEventListener("change", function() {
-  let selectCine = document.getElementById("codigo_cine");
+  let selectCine = document.getElementById("codigo_cine").value;
+  console.log(selectCine)
   let selectSala = document.getElementById("sala");
   selectSala.removeAttribute("disabled")
   selectSala.options.length = 1;
-  if(selectCine.value){
-    recibirData("cine/" + selectCine.value, "GET", "Error al cargar cines", "Exito al cargar cines")
-    .then((data) => {
-      let cant_salas = data.cant_salas;
+  for(let cine of cinesDisponibles){
+    console.log(cine.codigo)
+    if(cine.codigo == selectCine){
+      let cant_salas = cine.cant_salas;
       console.log("cantidad de salas:", cant_salas)
       for(let sala = 1; sala <= cant_salas; sala++){
         console.log("sala n° ", sala)
@@ -25,7 +40,7 @@ document.getElementById("codigo_cine").addEventListener("change", function() {
         option.text = sala;
         selectSala.appendChild(option);
       }
-    })
+    }
   }
 })
 

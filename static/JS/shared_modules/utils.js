@@ -12,3 +12,18 @@ export function fillSelect(endpoint, elementId, key){
         }
     })
 }
+
+export function fillSelectArray(array, domElementID, selectValue){
+    let select = document.getElementById(domElementID);
+    //console.log(array)
+
+
+    for(let i of array){
+        let objetId = Object.values(i)[1];
+        //console.log(objetId)
+        let option = document.createElement("option");
+        option.value = objetId;
+        option.text = i[selectValue];
+        select.appendChild(option);
+    }
+}

@@ -1,4 +1,4 @@
-import { recibirData, enviarData } from "/static/JS/shared_modules/apiFeedbackHandler.js";
+import { recibirData, enviarData, mostrarMensaje } from "/static/JS/shared_modules/apiFeedbackHandler.js";
 
 // Variables de estado para controlar la visibilidad y los datos del formulario
 let mostrarDatos = false;
@@ -8,34 +8,47 @@ let direccion = "";
 let cant_salas = "";
 let msgError = "Error al obtener el cine";
 let msgExito = "Cine modificado correctamente";
+let listaCines = [];
 
-document.getElementById("form-obtener-cine").addEventListener("submit", obtenerCine);
-document.getElementById("form-guardar-cambios").addEventListener("submit", guardarCambios);
 
-function obtenerCine(event){
-    event.preventDefault();
-    codigo = document.getElementById("codigo").value;
-    recibirData("cine/" + codigo, "GET", msgError, msgExito)
+function obtenerCines(){
+    recibirData("cine", "GET", msgError, "Cines obtenidos correctamente")
     .then((data) => {
-        nombre_cine = data.nombre_cine;
-        direccion = data.direccion;
-        cant_salas = data.cant_salas;
-        mostrarDatos = true; 
-        mostrarFormulario();
-    })
-    .catch(error =>{
-        console.error("Error al cargar el cine:", error)
+        for(let cine of data){
+            listaCines.push(cine);
+        }
     });
 }
 
+
+function buscarCine(event){
+    event.preventDefault()
+    codigo = document.getElementById("codigo").value
+    for(let cineBuscado of listaCines){
+        if(codigo == cineBuscado.codigo){
+            nombre_cine = cineBuscado.nombre_cine;
+            direccion = cineBuscado.direccion;
+            cant_salas = cineBuscado.cant_salas;
+            mostrarDatos = true; 
+            console.log("Cine encontrado")
+           break
+        } else {
+            mostrarDatos = false;
+        }
+    }
+    console.log(mostrarDatos)
+    mostrarFormulario();
+}
+
 function mostrarFormulario(){
-    if(mostrarDatos){
-        document.getElementById("nombre_cine").value = nombre_cine;
-        document.getElementById("direccion").value = direccion;
-        document.getElementById("cant_salas").value = cant_salas;
-        document.getElementById("datos-cine").style.display = "block";
+   if(mostrarDatos){
+       document.getElementById("nombre_cine").value = nombre_cine;
+       document.getElementById("direccion").value = direccion;
+       document.getElementById("cant_salas").value = cant_salas;
+       document.getElementById("datos-cine").style.display = "block";
     } else {
         document.getElementById("datos-cine").style.display = "none";
+        mostrarMensaje("Cine no encontrado", "red")
     }
 }
 
@@ -48,10 +61,10 @@ function guardarCambios(event){
     formData.append("cant_salas", document.getElementById("cant_salas").value);
     enviarData("cine/" + codigo, "PUT", formData, msgError, msgExito)
     .then(() => {
-        limpiarFormulario()
+        limpiarFormulario();
     })
     .catch(error => {
-        console.error("Error al guardar cambios", error)
+        console.error("Error al guardar cambios", error);
     });
 }
 
@@ -60,13 +73,18 @@ function limpiarFormulario() {
     document.getElementById("nombre_cine").value = "";
     document.getElementById("direccion").value = "";
     document.getElementById("cant_salas").value = "";
-  
+    
     codigo = "";
     mostrarDatos = false;
     nombre_cine = "";
     direccion = "";
     cant_salas = "";
-  
+    
     document.getElementById("datos-cine").style.display = "none";
-  }
-  
+}
+            
+            
+document.addEventListener("DOMContentLoaded", obtenerCines);
+document.getElementById("form-obtener-cine").addEventListener("submit", buscarCine);
+document.getElementById("form-guardar-cambios").addEventListener("submit", guardarCambios);
+            

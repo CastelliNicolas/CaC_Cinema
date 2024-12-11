@@ -1,3 +1,4 @@
+import { fillSelectArray } from "../../shared_modules/utils.js";
 import {recibirData, enviarData} from "/static/JS/shared_modules/apiFeedbackHandler.js";
 import {fillSelect} from "/static/JS/shared_modules/utils.js";
 // Funcion para formatear fecha
@@ -18,24 +19,67 @@ let nombre_cine = "";
 let codigo_cine = "";
 let sala = "";
 let mostrarDatos = false;
+
+let cinesDisponibles = [];
+
+function cargarCinesDisponibles(){
+  recibirData("cine", "GET", "Err", "EXito")
+  .then((data)=>{
+    for(let cine of data){
+      cinesDisponibles.push(cine);
+    }
+    console.log("--"+cinesDisponibles)
+    fillSelectCines()
+  })
+};
+
+function fillSelectCines(){
+  fillSelectArray(cinesDisponibles, "codigo_cine", "nombre_cine");
+};
+
 // Funcion para cargar los selects
-function cargarListasIniciales() {
-  fillSelect("cine", "codigo_cine", "nombre_cine");
-  fillSelect("pelicula", "codigo_pelicula", "nombre_pelicula")
-}
-document.addEventListener("DOMContentLoaded", cargarListasIniciales)
+function fillSelectPeliculas() {
+  fillSelect("pelicula", "codigo_pelicula", "nombre_pelicula");
+};
+
+
+function encontrarCine(cineId){
+  console.log(cineId)
+  for(let cine of cinesDisponibles){
+    console.log(cine.codigo)
+    if(cine.codigo == cineId){
+      let cant_salas = cine.cant_salas;
+      console.log("cantidad de salas:", cant_salas)
+      return cant_salas
+    }
+  }
+};
+
+function fillSalasSelect(salas){
+  let selectSala = document.getElementById("sala");
+  for(let sala = 1; sala <= salas; sala++){
+    console.log("sala n° ", sala)
+    let option = document.createElement("option");
+    option.value = sala;
+    option.text = sala;
+    selectSala.appendChild(option);
+  }
+};
+
 // Events
+document.addEventListener("DOMContentLoaded", cargarCinesDisponibles)
+document.addEventListener("DOMContentLoaded", fillSelectPeliculas)
 document.getElementById("form-obtener-funcion").addEventListener("submit", obtenerFuncion);
 document.getElementById("form-guardar-cambios").addEventListener("submit", guardarCambios);
+document.getElementById("codigo_cine").addEventListener("change", () => {
+  let selectCine = document.getElementById("codigo_cine").value;
+  console.log(selectCine)
+  let selectSala = document.getElementById("sala");
+  selectSala.options.length = 0;
+  let cant_salas = encontrarCine(selectCine);
+  fillSalasSelect(cant_salas)
+});
 
-document.getElementById("codigo_cine").addEventListener("change", function() {
-  let codigo_cine = document.getElementById("codigo_cine").value
-  recibirData("cine/" + codigo_cine, "GET", "Error al obtener salas", "Exito al obtener salas")
-  .then((data) => {
-    let salas = data.cant_salas;
-    fillSalasSelect(salas);
-  })
-})
 
 function obtenerFuncion(event) {
   event.preventDefault();
@@ -53,27 +97,13 @@ function obtenerFuncion(event) {
       sala = data.sala;
       console.log("Sala n°", sala)
       mostrarDatos = true; //Activa la vista del segundo formulario
-      recibirData("cine/" + codigo_cine, "GET", "Error al obtener las salas", "Salas obtenidas correctamente")
-      .then((data) => {
-        let salas = data.cant_salas;
-        fillSalasSelect(salas)
-        mostrarFormulario()
+      let cant_salas = encontrarCine(codigo_cine)
+      fillSalasSelect(cant_salas)
+      mostrarFormulario()
       })
-    });
-}
+};
 
-function fillSalasSelect(salas){
-  let select2 = document.getElementById("sala");
-  select2.options.length = 0;
-  for(let sala = 1; sala <= salas; sala++){
-    console.log("sala n° ", sala)
-    let option = document.createElement("option");
-    option.value = sala;
-    option.text = sala;
-    select2.appendChild(option);
-  }
-    console.log(select2.innerHTML); // Check the options
-}
+
 
 // Muestra el formulario con los datos de la pelicula
 function mostrarFormulario() {
@@ -84,13 +114,14 @@ function mostrarFormulario() {
     document.getElementById("fecha").value = convertirFecha(fecha);
     document.getElementById("codigo_cine").value = codigo_cine;
     document.getElementById("codigo_cine").text = nombre_cine;
+    console.log("Sala valor" + sala)
     document.getElementById("sala").value = sala;
 
     document.getElementById("datos-funcion").style.display = "block";
   } else {
     document.getElementById("datos-funcion").style.display = "none";
   }
-}
+};
 
 // Se usa para enviar los datos modificados del producto al servidor.
 function guardarCambios(event) {
@@ -112,7 +143,7 @@ function guardarCambios(event) {
       // Código para manejar errores
       console.error("Error al obtener las funciones:", error);
     });
-}
+};
 
 // Restablece todas las variables relacionadas con el formulario a sus valores iniciales, lo que efectivamente "limpia" el formulario.
 function limpiarFormulario() {
@@ -132,4 +163,4 @@ function limpiarFormulario() {
   mostrarDatos = false;
 
   document.getElementById("datos-funcion").style.display = "none";
-}
+};

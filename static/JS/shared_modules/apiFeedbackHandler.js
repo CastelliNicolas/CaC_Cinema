@@ -1,3 +1,4 @@
+console.log("apiFeedbackHandler.js cargado");
 const URL = "http://127.0.0.1:5000/"
 //const URL = "https://sinost.pythonanywhere.com/";
 //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
@@ -81,7 +82,7 @@ export function borrarData(endpoint, method, msgError, msgExito){
 }
 
 // Función para mostrar mensajes
-function mostrarMensaje(mensaje, color) {
+export function mostrarMensaje(mensaje, color) {
     let mensajeErrorElemento = document.getElementById("mensajeError");
     if (mensajeErrorElemento) {
       mensajeErrorElemento.style.display = "block";

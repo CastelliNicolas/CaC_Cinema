@@ -21,22 +21,16 @@
           <div class="select">
             <select name="select-cine" id="selection-cine">
               <option value="" class="hidden">Selecciona el cine</option>
-              <option value="place 1">CABA</option>
-              <option value="place 2">Ituzaingo</option>
-              <option value="place 3">Quilmes</option>
             </select>
           </div>
           <div class="select">
-            <select name="select-movie" id="selection-movie" onchange="obtenerInfo()">
+            <select name="select-movie" id="selection-movie">
               <option value="" class="hidden">Selecciona una pelicula</option>
             </select>
           </div>
           <div class="select">
             <select name="select-horario" id="selection-horario">
               <option value="" class="hidden">Selecciona un horario</option>
-              <option value="hour 1">Lunes - 15Hs</option>
-              <option value="hour 2">Miercoles - 16Hs</option>
-              <option value="hour 3">Sabado - 20Hs</option>
             </select>
           </div>
           <div class="select">
@@ -75,8 +69,8 @@
 
     <footer id="idFooter"></footer>
     <script src="/static/JS/ui_components/footer.js"></script>
-    <script src="/static/JS/ui_components/header.js"></script>
+    <script type="module" src="/static/JS/ui_components/header.js"></script>
     <script src="/static/JS/ui_components/navCollapseControl.js"></script>
-    <script src="/static/JS/compra.js"></script>
+    <script type="module" src="/static/JS/compra.js"></script>
   </body>
 </html>

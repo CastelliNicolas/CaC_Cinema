@@ -1,5 +1,5 @@
 import { enviarData } from "../shared_modules/apiFeedbackHandler.js";
-const URL = "http://127.0.0.1:5000/"
+
 let errorAlertPass = document.getElementById("formulario-error-pass");
 let errorAlertEmail = document.getElementById("formulario-error-email");
 
