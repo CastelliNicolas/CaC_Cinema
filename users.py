@@ -5,7 +5,7 @@ from init_db import crear_db
 
 import mysql.connector
 
-from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash
 
 #--------------------------------------------------------------------
 
@@ -114,7 +114,10 @@ def agregar_usuario():
     celular = request.form['celular']
     genero = request.form['genero']
     fecha_nacimiento = request.form['fecnac']
-    nuevo_id = usuario.agregar_usuario(nombre, apellido, email, contraseña, celular, genero, fecha_nacimiento)
+
+    contraseña_hash = generate_password_hash(contraseña, method="pbkdf2:sha256")
+
+    nuevo_id = usuario.agregar_usuario(nombre, apellido, email, contraseña_hash, celular, genero, fecha_nacimiento)
     if nuevo_id:
         return jsonify({"mensaje": "Usuario agregado correctamente.", "id": nuevo_id}), 201
     else:
@@ -122,20 +125,6 @@ def agregar_usuario():
 
 @usuarios_bp.route("/usuario/<int:id>", methods=["PUT"])
 def modificar_usuario(id):
-    
-    """"
-    data = request.get_json()
-    print(request.get_json())
-
-    if "nombre" in data:
-        cambios["nombre"] = data["nombre"]
-    if "email" in data:
-        cambios["email"] = data["email"]
-    if "celular" in data:
-        cambios["celular"] = data["celular"]
-    
-
-    """
     nuevo_nombre = request.form.get("nombre_usuario")
     nuevo_email = request.form.get("email")
     nuevo_celular = request.form.get("celular")
@@ -163,12 +152,6 @@ def login_usuario():
     
     email = request.form["email"]
     password = request.form["password"]
-    """""
-    data = request.get_json()  
-    email = data.get("email")
-    password = data.get("password")
-    """
-    
     print(f"Email recibido: {email}")
     print(f"Password recibido: {password}")
     if not email or not password:
@@ -178,8 +161,11 @@ def login_usuario():
     if not user:
         return jsonify({"error": "Correo incorrecto"}), 401
     
-    if not password == user["contraseña"]:
+    if not check_password_hash(user["contraseña"], password):
         return jsonify({"error": "Contraseña incorrecta"}), 401
+
+    """ if not password == user["contraseña"]:
+        return jsonify({"error": "Contraseña incorrecta"}), 401 """
     session["user_id"] = user["id"]
     print(session)
          # Guardar el id del usuario en la sesión

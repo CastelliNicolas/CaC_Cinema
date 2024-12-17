@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registrarse - Codo Cinema</title>
     <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/registro.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
     <link
@@ -15,7 +16,7 @@
   <body>
     <header id="idHeader"></header>
     <main>
-      <h2 class="difuminado">Crear nuevo usuario</h2>
+      <h2 id="difuminado" class="difuminado">Crear nuevo usuario</h2>
       <section class="registrar">
         <form action="#" method="#" id="formulario_user" onsubmit="return validarRegistro()" class="formulario">
           <label class="formulario-label" for="nombre">Nombre</label>
@@ -62,6 +63,12 @@
           <button class="formulario-input login" type="submit" id="enviar">Enviar</button>
         </form>
       </section>
+      <section>
+        <div class="msgLogon" id="msgLogon">
+          <img class="logon-icon" src="/static/imagenes/icons8-comprobado.svg" alt="logomsglogon">
+          <p id="msgSuccesfull"></p>
+        </div>
+      </section>
     </main>
 
     <footer id="idFooter"></footer>
@@ -70,5 +77,6 @@
     <script type="module" src="/static/JS/ui_components/header.js"></script>
     <script src="/static/JS/ui_components/navCollapseControl.js"></script>
     <script src="/static/JS/validacion.js"></script>
+    <script src="/static/JS/shared_modules/pathTracking.js"></script>
   </body>
 </html>

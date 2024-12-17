@@ -1,0 +1,17 @@
+.msgLogon{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 80px;
+    margin-bottom: 6%;
+}
+
+.msgLogon p {
+    font-size: 24px;
+}
+
+
+.logon-icon{
+    width: 300px;
+}

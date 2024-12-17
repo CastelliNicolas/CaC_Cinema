@@ -138,7 +138,7 @@ nav {
     background-color: var(--fondo);
 }
 
-.login-icon, .profile-icon {
+.login-icon, .profile-icon, .logon-icon {
     filter: invert(100%);
     width: 30px;
     margin-right: 10px;
