@@ -1,5 +1,5 @@
-import { recibirData, enviarData, mostrarMensaje } from "/static/JS/shared_modules/apiFeedbackHandler.js";
-
+import { recibirData, enviarData, mostrarMensaje} from "/static/JS/shared_modules/apiFeedbackHandler.js";
+import { fillArray, findCine} from "../../shared_modules/utils.js";
 // Variables de estado para controlar la visibilidad y los datos del formulario
 let mostrarDatos = false;
 let codigo = "";
@@ -12,31 +12,29 @@ let listaCines = [];
 
 
 function obtenerCines(){
-    recibirData("cine", "GET", msgError, "Cines obtenidos correctamente")
-    .then((data) => {
-        for(let cine of data){
-            listaCines.push(cine);
-        }
+    fillArray("cine")
+    .then((cinesObtenidos) => {
+        listaCines = cinesObtenidos
+        console.log(listaCines)
     });
 }
 
 
 function buscarCine(event){
     event.preventDefault()
-    codigo = document.getElementById("codigo").value
-    for(let cineBuscado of listaCines){
-        if(codigo == cineBuscado.codigo){
-            nombre_cine = cineBuscado.nombre_cine;
-            direccion = cineBuscado.direccion;
-            cant_salas = cineBuscado.cant_salas;
-            mostrarDatos = true; 
-            console.log("Cine encontrado")
-           break
-        } else {
-            mostrarDatos = false;
-        }
+    let codigo_cine = document.getElementById("codigo").value
+    let cineEncontrado = findCine(listaCines, codigo_cine)
+    if(cineEncontrado){
+        nombre_cine = cineEncontrado.nombre_cine;
+        direccion = cineEncontrado.direccion;
+        cant_salas = cineEncontrado.cant_salas;
+        mostrarDatos = true; 
+        console.log("Cine encontrado")
+    } else {
+        console.log("No se encontro el cine")
+        mostrarDatos = false
     }
-    console.log(mostrarDatos)
+    console.log("Flag MostrarFormulario: ", mostrarDatos)
     mostrarFormulario();
 }
 

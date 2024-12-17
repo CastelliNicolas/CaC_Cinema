@@ -16,9 +16,10 @@ if (codigo) {
                 const video_id = videoUrl.split('v=')[1].split('&')[0];
                 const video_embed_url = `https://www.youtube.com/embed/${video_id}`;
                 // Llenar los campos de la plantilla con los datos obtenidos
-                document.getElementById("titulo_detalle").textContent = data.nombre;
+                document.getElementById("titulo-pestaña").textContent = `${data.nombre_pelicula} - CaC`
+                document.getElementById("titulo_detalle").textContent = data.nombre_pelicula;
                 document.getElementById("duracion_detalle").innerText = `Duracion: ${data.duracion} min`;
-                document.getElementById("genero_detalle").innerText = `Genero: ${data.genero}`;
+                document.getElementById("genero_detalle").innerText = `Genero: ${data.genero_pelicula}`;
                 document.getElementById("director_detalle").innerText = `Director: ${data.director}`;
                 document.getElementById("clasificacion_detalle").innerText = `Clasifcacion: ${data.clasificacion}`;
                 document.getElementById("sinopsis_detalle").innerText = data.sinopsis;

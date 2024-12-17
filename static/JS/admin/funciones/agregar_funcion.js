@@ -1,48 +1,44 @@
-import { fillSelectArray } from "../../shared_modules/utils.js";
-import { recibirData, enviarData} from "/static/JS/shared_modules/apiFeedbackHandler.js"
-import{fillSelect} from "/static/JS/shared_modules/utils.js"
+import { fillSelectArray, fillArray, findElement, fillSalasSelect } from "../../shared_modules/utils.js";
+import {enviarData} from "/static/JS/shared_modules/apiFeedbackHandler.js";
+import{fillSelect} from "/static/JS/shared_modules/utils.js";
 //Cargar Selects de Cine y Peliculas
 
-let cinesDisponibles = []
+let cinesDisponibles = [];
 
-function obtenerCines(){
-  recibirData("cine", "GET", "Err", "EXX")
-  .then((data)=>{
-    for(let cine of data){
-      cinesDisponibles.push(cine);
-    }
-    cargarOpciones()
-  })
+function loadSelects(){
+  fillArray("cine")
+    .then(cinesObtenidos => {
+      cinesDisponibles = cinesObtenidos;
+      console.log("Obtenido: ", cinesDisponibles)
+      fillSelectCines(cinesDisponibles);
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  fillSelectPeliculas();
 }
 
-document.addEventListener("DOMContentLoaded", obtenerCines);
-
-function cargarOpciones(){
-  fillSelect("pelicula", "codigo_pelicula", "nombre_pelicula")
-  fillSelectArray(cinesDisponibles, "codigo_cine", "nombre_cine")
+function fillSelectCines(cinesDisponibles){
+  fillSelectArray(cinesDisponibles, "codigo_cine", "nombre_cine");
 };
+
+// Funcion para cargar los selects
+function fillSelectPeliculas() {
+  fillSelect("pelicula", "codigo_pelicula", "nombre_pelicula");
+};
+
+document.addEventListener("DOMContentLoaded", loadSelects);
+
+
 //Cargar select dinamico de Salas
 document.getElementById("codigo_cine").addEventListener("change", function() {
-  let selectCine = document.getElementById("codigo_cine").value;
-  console.log(selectCine)
+  let selectedCine = document.getElementById("codigo_cine").value;
+  console.log(selectedCine)
   let selectSala = document.getElementById("sala");
-  selectSala.removeAttribute("disabled")
-  selectSala.options.length = 1;
-  for(let cine of cinesDisponibles){
-    console.log(cine.codigo)
-    if(cine.codigo == selectCine){
-      let cant_salas = cine.cant_salas;
-      console.log("cantidad de salas:", cant_salas)
-      for(let sala = 1; sala <= cant_salas; sala++){
-        console.log("sala n° ", sala)
-        let option = document.createElement("option");
-        option.value = sala;
-        option.text = sala;
-        selectSala.appendChild(option);
-      }
-    }
-  }
-})
+  selectSala.removeAttribute("disabled");
+  let cineEncontrado = findElement(cinesDisponibles, selectedCine);
+  fillSalasSelect(cineEncontrado.cant_salas, 1);
+});
 
 // Capturamos el evento de envío del formulario
 document.getElementById("formulario_funcion").addEventListener("submit", function (event) {
