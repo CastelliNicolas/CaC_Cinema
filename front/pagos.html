@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrarse - Codo Cinema</title>
+    <link rel="stylesheet" href="/static/css/pagos.css" />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  </head>
+  <body>
+    <header id="idHeader"></header>
+    <main>
+      <div class="detalles-container" id="detalles-container">
+        <div class="funcion-total-container">
+          <section class="tarjeta-compra" id="detalles-compra">
+            <img alt="imagen-pelicula" class="portada-pelicula-compra" id="imagen-pelicula">
+            <div class="texto-detalles-compra">
+              <h2 id="titulo-pelicula">Titulo pelicula</h2>
+              <ul id="detalles-compra-lista">
+                <li><span id="nombre-cine"></span></li>
+                <li><span id="direccion-cine"></span></li>
+                <li><span id="funcion-sala"></span></li>
+                <li><span id="funcion-fecha-horario"></span></li>
+              </ul>
+            </div>
+          </section>
+          <section class="tarjeta-compra-total">
+            <div class="compra-datos">
+              <p class="label" id="total-entradas">Cantidad de entradas: </p>
+              <p  class="label">Total a pagar: </p>
+            </div>
+            <div class="compra-totales">
+              <p class="value" id="cantidad-entradas">0</p>
+              <p class="value" id="total-pagar">$0</p>
+            </div>
+            <div>
+              <button id="btn-deshacer-entradas">Deshacer eleccion</button>
+            </div>
+          </section>
+        </div>
+        <section id="detalles-pago" class="tarjeta-pago">
+          <div class="tarjetas-entradas-container">
+            <button class="tarjeta-entrada" id="button-1">
+              <p>Entrada general</p>
+              <p>$5.550</p>
+            </button>
+            <button class="tarjeta-entrada" id="button-2">
+              <p>2 entradas</p>
+              <p>10% descuento</p>
+              <p>$9.990</p>
+            </button>
+            <button class="tarjeta-entrada" id="button-3">
+              <p>3 entradas</p>
+              <p>15% descuento</p>
+              <p>$15.500</p>
+            </button>
+          </div>
+        </section>
+      </div>
+      <div>
+        <a href="/front/compra.html">Volver</a>
+        <a id="btn-siguiente">Siguiente</a>
+      </div>
+    </main>
+    <footer id="idFooter"></footer>
+    <script src="/static/JS/ui_components/footer.js"></script>
+    <script type="module" src="/static/JS/pagos.js"></script>
+    <script type="module" src="/static/JS/ui_components/header.js"></script>
+    <script src="/static/JS/ui_components/navCollapseControl.js"></script>
+    <script src="/static/JS/validacion.js"></script>
+  </body>
+</html>

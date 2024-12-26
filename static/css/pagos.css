@@ -1,0 +1,123 @@
+button {
+    border-width: 0px;
+}
+
+.detalles-container{
+    display: flex;
+    height: 500px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.funcion-total-container, .tarjeta-pago{
+    height: 360px;
+}
+
+.funcion-total-container{
+    border: var(--botones-color) 2px solid;
+    display: grid;
+    border-radius: 8px;
+    grid-template-columns: 2fr 1fr; 
+    gap: 10px;  
+}
+
+.tarjeta-compra{
+    width: 100%;
+    display: grid;
+    grid-template-areas:
+        "imagen contenido"
+        "imagen contenido";
+    grid-template-columns: 1fr 1.1fr; 
+    grid-template-rows: auto 1fr; 
+    gap: 10px; 
+    height: 350px;
+    /* padding: 10px; */
+}
+
+.portada-pelicula-compra{
+    grid-area: imagen;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.texto-detalles-compra{
+    grid-area: contenido;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    height: 100%;
+}
+
+.texto-detalles-compra li{
+    list-style: none;
+    margin-bottom: 10px;
+    font-size: small;
+}
+
+
+.tarjeta-compra-total p{
+    margin-bottom: 20px;
+}
+
+.tarjeta-compra-total {
+    border-left: 2px solid var(--botones-color);
+    display: grid;
+    grid-template-columns: 1fr auto; /* Dos columnas: texto y valores */
+    gap: 10px; /* Espacio entre columnas */
+    align-items: start; /* Alinea verticalmente el contenido */
+    padding: 10px;
+    height: 100%;
+}
+.compra-totales{
+    width: 100%;
+}
+.compra-totales p{
+    text-align: right;
+    overflow: hidden;
+}
+
+.tarjeta-compra-total .value, .tarjeta-compra-total .label {
+    margin-bottom: 20px;
+}
+
+.compra-datos , .compra-totales {
+    display: grid;
+    row-gap: 20px;
+}
+
+
+.tarjeta-compra-total .label {
+    text-align: left; /* Alinea las etiquetas a la izquierda */
+    margin: 0; /* Elimina márgenes por defecto */
+}
+
+.tarjeta-compra-total .value {
+    text-align: right; /* Alinea los valores a la derecha */
+    margin: 0; /* Elimina márgenes por defecto */
+}
+
+.tarjetas-entradas-container {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .tarjeta-entrada {
+    color: var(--texto);
+    font-size: medium;
+    text-decoration: none;
+    padding: 10px;
+    outline: 2px solid var(--botones-color);
+    border-radius: 8px;
+    text-align: center;
+    background-color: var(--botones-color);
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+  
+  .tarjeta-entrada:hover {
+    transform: scale(1.05);
+    background-color: var(--background-color);
+  }

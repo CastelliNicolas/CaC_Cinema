@@ -48,9 +48,9 @@ class FuncionesP:
         return funcion
     
     def consultar_funcion(self, codigo):
-        sql = ("SELECT funcion.codigo, funcion.codigo_pelicula, funcion.codigo_cine, pelicula.nombre_pelicula AS funcion_pelicula, "
+        sql = ("SELECT funcion.codigo, funcion.codigo_pelicula, funcion.codigo_cine, pelicula.nombre_pelicula AS funcion_pelicula, pelicula.imagen_url AS funcion_pelicula_imagen, "
         "DATE_FORMAT(funcion.horario, '%H:%i') AS horario, "
-        "funcion.fecha, cine.nombre_cine AS funcion_cine, funcion.sala "
+        "funcion.fecha, cine.nombre_cine AS funcion_cine, cine.direccion AS funcion_cine_direccion ,funcion.sala "
         "FROM funcion "
         "JOIN pelicula ON funcion.codigo_pelicula = pelicula.codigo "
         "JOIN cine ON funcion.codigo_cine = cine.codigo "

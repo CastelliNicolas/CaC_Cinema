@@ -814,6 +814,7 @@ footer p {
     background-color: #222222;
     color: #828282;
     cursor: default;
+    outline: none;
 }
 
 .disable:hover {

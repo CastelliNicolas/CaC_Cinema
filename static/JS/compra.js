@@ -115,7 +115,7 @@ document
   .addEventListener("change", obtenerFunciones);
 
 // Verificacion de compra //
-const userLoggedIn = localStorage.getItem("userLoggedIn");
+const userLoggedIn = localStorage.getItem("userID");
 function verificarSelection() {
   if (selectCine.value && selectFilm.value) {
     selectHour.removeAttribute("disabled");
@@ -123,11 +123,12 @@ function verificarSelection() {
   if (selectCine.value && selectFilm.value && selectHour.value) {
     console.log("TRUE");
     buttonBuy.classList.remove("disable");
+    sessionStorage.setItem("idFuncionSeleccionada", selectHour.value)
     if (userLoggedIn) {
-      buttonBuy.setAttribute("href", "pago.html");
+      buttonBuy.setAttribute("href", "/front/pagos.html");
     } else {
       buttonBuy.setAttribute("href", "sesion.html");
-      localStorage.setItem("rutaPosteriorLogin", "/pago.html");
+      localStorage.setItem("rutaPosteriorLogin", "/front/pagos.html");
     }
   }
 }
